@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<launch>
+	<!--arg name="shuttle"  default = "1.0"/-->
+	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
+
+	</node>
+
+</launch>

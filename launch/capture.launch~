@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<launch>
+	
+	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
+		<!--
+		<param name = "numCap" value = "$(arg num)" />
+	-->
+	</node>
+</launch>
