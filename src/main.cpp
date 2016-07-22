@@ -20,7 +20,7 @@ int main(int32_t argc, char **argv) {
   time_t now;
   //struct tm *timenow;
 
-  shutter_speed = 2.5;
+  shutter_speed = 0.3;
   // shuttle_speed = atoi(argv[1]);
   time(&now);
   time(&currentdate);

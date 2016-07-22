@@ -134,14 +134,18 @@ namespace flea3 {
         }
 
         frameInfoRegVal = frameInfoRegVal | 0x01;
-          // printf("value is : %x", frameInfoRegVal);
-        // std::cout << " value is: " << frameInfoRegVal << std::endl;
         error = cam.WriteRegister( k_frameInfoReg, frameInfoRegVal );
         if ( error != FlyCapture2::PGRERROR_OK )
         {
-          std::cout << " Wrong writing register!" << std::endl;
+          std::cout << " Wrong writing frame_info register!" << std::endl;
         }
 
+        ShutterRegVal = 0x80001200;
+        error = cam.WriteRegister( k_ShutterReg, ShutterRegVal );
+        if ( error != FlyCapture2::PGRERROR_OK )
+        {
+          std::cout << " Wrong writing auto_shutter register!" << std::endl;
+        }
 
         error = cam.GetCameraInfo(&camInfo);
         if (error != FlyCapture2::PGRERROR_OK)
@@ -163,42 +167,15 @@ namespace flea3 {
             errCount ++;
         }
 
-        camProperty.type = FlyCapture2::SHUTTER;
-        camProperty.absControl = true;
-        camProperty.onePush = false;
-        camProperty.onOff = true;
-        camProperty.autoManualMode = false;
-        camProperty.absValue = shutter_speed;
-        error = cam.SetProperty(&camProperty);
-        if (error != FlyCapture2::PGRERROR_OK)
-        {
-            std::cout << "setProperty Wrong" << std::endl;
-            errCount ++;
-        }
-
-        // camProperty.type = FlyCapture2::GAIN;
+        // camProperty.type = FlyCapture2::SHUTTER;
+        // camProperty.absControl = true;
         // camProperty.onePush = false;
         // camProperty.onOff = true;
-        // camProperty.autoManualMode = true;
+        // camProperty.autoManualMode = false;
+        // camProperty.absValue = shutter_speed;
         // error = cam.SetProperty(&camProperty);
         // if (error != FlyCapture2::PGRERROR_OK)
         // {
-        //     //PrintError( error );
-        //     std::cout << "setProperty Wrong" << std::endl;
-        //     errCount ++;
-        // }
-
-        // camProperty.type = FlyCapture2::FRAME_RATE;
-        // camProperty.onOff = true;
-        // camProperty.autoManualMode = true;
-        // // camProperty.absValue = 5.3;
-        //
-        // // camProperty.onOff = false;
-        // // camProperty.autoManualMode = true;
-        // error = cam.SetProperty(&camProperty);
-        // if (error != FlyCapture2::PGRERROR_OK)
-        // {
-        //     //PrintError( error );
         //     std::cout << "setProperty Wrong" << std::endl;
         //     errCount ++;
         // }

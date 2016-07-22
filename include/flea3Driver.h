@@ -68,6 +68,8 @@ private:
     unsigned int trigger_mode;
     const unsigned int k_frameInfoReg = 0x12F8;
     unsigned int frameInfoRegVal;
+    const unsigned int k_ShutterReg = 0x1098;
+    unsigned int ShutterRegVal;
     double shutter_speed;
     bool isCameraReady;
     // bool isFrameAvailable;
