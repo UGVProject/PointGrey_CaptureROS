@@ -133,7 +133,7 @@ namespace flea3 {
           std::cout << " Wrong reading register!" << std::endl;
         }
 
-        frameInfoRegVal = frameInfoRegVal | 0x01;
+        frameInfoRegVal = frameInfoRegVal | 0x41;
         error = cam.WriteRegister( k_frameInfoReg, frameInfoRegVal );
         if ( error != FlyCapture2::PGRERROR_OK )
         {

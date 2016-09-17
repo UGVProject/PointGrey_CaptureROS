@@ -20,7 +20,7 @@ int main(int32_t argc, char **argv) {
   time_t now;
   //struct tm *timenow;
 
-  shutter_speed = 0.3;
+//  shutter_speed = 0.3;
   // shuttle_speed = atoi(argv[1]);
   time(&now);
   time(&currentdate);
@@ -34,12 +34,12 @@ int main(int32_t argc, char **argv) {
   // std::cout << "txtFilename is: " << timestampfile << std::endl;
 
   flea3::stereoCam m_camera;
-  m_camera.setGuid(15231263, 15231302); // left and right UID
-  m_camera.setPublishFrequency(50);
-  m_camera.setShuttle(shutter_speed);
-  m_camera.setFrameId("wide_camera");
+//  m_camera.setGuid(15231263, 15231302); // left and right UID
+//  m_camera.setPublishFrequency(50);
+//  m_camera.setShuttle(shutter_speed);
+//  m_camera.setFrameId("wide_camera");
   m_camera.set_TriggerMode_value(0);
-  m_camera.setTopicName("wide/image_raw");
+//  m_camera.setTopicName("wide/image_raw");
   m_camera.setTXTName(timestampfile);
   m_camera.run();
 

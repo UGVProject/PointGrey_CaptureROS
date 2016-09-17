@@ -8,6 +8,7 @@
 
 #include "../include/flea3Driver.h"
 #include "ros/ros.h"
+#include <ros/console.h>
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.h>
 #include <opencv2/highgui/highgui.hpp>
@@ -31,15 +32,15 @@ public:
 
   void loadParam(ros::NodeHandle &nh);
 
-  void setGuid(const uint64_t guid_left, const uint64_t guid_right);
+//  void setGuid(const uint64_t guid_left, const uint64_t guid_right);
 
-  void setPublishFrequency(const double frequency);
+//  void setPublishFrequency(const double frequency);
 
-  void setTopicName(const std::string topic_name);
+//  void setTopicName(const std::string topic_name);
 
-  void setFrameId(const std::string frame_id);
+//  void setFrameId(const std::string frame_id);
 
-  void setShuttle(const double Shuttlespeed);
+//  void setShuttle(const double Shuttlespeed);
 
   void setTXTName(char txtfile[]);
 
@@ -57,13 +58,14 @@ private:
   cv::Mat frame_left;
   cv::Mat frame_right;
   cv::Mat frame_2;
+//  cv::Mat frame_cut;
   cv::Mat res;
   unsigned int frameTimeStamp_left;
   unsigned int frameTimeStamp_right;
   double frameSecond_left;
   double frameSecond_right;
-  unsigned int rzWidth;
-  unsigned int rzHeight;
+  int rzWidth;
+  int rzHeight;
   unsigned int num_camera;
   char timestampfile1[100];
   double frameTimeStamp_left_old;
@@ -74,20 +76,21 @@ private:
   double difference;
   unsigned int count_outof_sync;
   // parameters
-  std::string uidString_left;
-  std::string uidString_right;
-  unsigned int uid_left;
-  unsigned int uid_right;
-  unsigned int imgWidth_;
-  unsigned int imgHeight_;
+  int uid_left;
+  int uid_right;
+  int imgWidth_;
+  int imgHeight_;
+  int imgHeight_cut;
   unsigned int imgSize_;
+  int upbound;
+  int downbound;
   double shuttle_speed;
   unsigned int trigger_mode_value;
   bool cameraFault_;
   int64_t framecount;
   std::string topic_name_;
   std::string frame_id_;
-  double loopFrequency_;
+  int loopFrequency_;
   bool quitSignal_;
 
   inline double imageTimeStampToSeconds(unsigned int uiRawTimestamp);
