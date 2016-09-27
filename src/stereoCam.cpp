@@ -68,27 +68,27 @@ void stereoCam::set_TriggerMode_value(unsigned int triggerMode) {
 void stereoCam::run() {
   ros::NodeHandle nh("~");
 
-  if(nh.getParam("/image/width", imgWidth_))
+  if(nh.getParam("image/width", imgWidth_))
     ROS_INFO("image width: %d", imgWidth_);
   else
     ROS_WARN("Use default image width: %d", imgWidth_);
-  if(nh.getParam("/image/height", imgHeight_))
+  if(nh.getParam("image/height", imgHeight_))
     ROS_INFO("image height: %d", imgHeight_);
   else
     ROS_WARN("Use default image height: %d", imgHeight_);
-  if(nh.getParam("/roi/upbound", upbound))
+  if(nh.getParam("roi/upbound", upbound))
     ROS_INFO("image roi up boundary: %d", upbound);
   else
     ROS_WARN("Use default image roi upbound: %d", upbound);
-  if(nh.getParam("/roi/downbound", downbound))
+  if(nh.getParam("roi/downbound", downbound))
     ROS_INFO("image roi down boundary: %d", downbound);
   else
     ROS_WARN("Use default image roi downbound: %d", downbound);
-  if(nh.getParam("/left/Guid", uid_left))
+  if(nh.getParam("left/Guid", uid_left))
     ROS_INFO("left camera guid: %d", uid_left);
   else
     ROS_WARN("Use default left camera guid: %d", uid_left);
-  if(nh.getParam("/right/Guid", uid_right))
+  if(nh.getParam("right/Guid", uid_right))
     ROS_INFO("right camera guid: %d", uid_right);
   else
     ROS_WARN("Use default right camera guid: %d", uid_right);
@@ -96,15 +96,15 @@ void stereoCam::run() {
     ROS_INFO("shutter speed: %f", shuttle_speed);
   else
     ROS_WARN("Use default shutter speed: %f", shuttle_speed);
-  if(nh.getParam("/publish/frequency", loopFrequency_))
+  if(nh.getParam("publish/frequency", loopFrequency_))
     ROS_INFO("publish loop frequency: %d", loopFrequency_);
   else
     ROS_WARN("Use default publish loop frequency: %d", loopFrequency_);
-  if(nh.getParam("/publish/frame_id", frame_id_ ))
+  if(nh.getParam("publish/frame_id", frame_id_ ))
     ROS_INFO("Get stereo frame ID: %s", frame_id_.c_str());
   else
     ROS_WARN("Use default stereo frame ID: %s", frame_id_.c_str());
-  if(nh.getParam("/publish/topic_name", topic_name_ ))
+  if(nh.getParam("publish/topic_name", topic_name_ ))
     ROS_INFO("Get stereo frame topic: %s", topic_name_.c_str());
   else
     ROS_WARN("Use default stereo frame topic: %s", topic_name_.c_str());
