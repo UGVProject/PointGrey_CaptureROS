@@ -4,7 +4,9 @@
 	<arg name="frameTopic"  default = "wide/image_raw" />
 
 	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
-    <param name="left/Guid" value="15231263" />
+    <!-- <param name="left/Guid" value="15231263" /> -->
+	    <!-- <param name="left/Guid" value="15231263" />   remote 16243866  |    right  15231263    -->
+		<param name="left/Guid" value="16243862" />
     <param name="right/Guid" value="15231302" />
     <param name="image/width" value="1280" />
     <param name="image/height" value="1024" />

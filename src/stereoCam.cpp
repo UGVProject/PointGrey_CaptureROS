@@ -24,7 +24,7 @@ void stereoCam::loadParam(ros::NodeHandle &nh) {
   framecount = 0;
   // const int rzWidth = static_cast<int>(imgWidth_/2);
   // unsigned int rzHeight = static_cast<int>(imgHeight_/2);
-  rzHeight = imgHeight_ - upbound - downbound/ 2;
+  rzHeight = (imgHeight_ - upbound - downbound)/ 2;
   imgSize_ = (unsigned int) (imgHeight_ * imgWidth_);
 }
 
@@ -153,7 +153,7 @@ void stereoCam::run() {
     m_cam_left.getFrame(frame_left.data, imgSize_);
       cv::Mat frame_left_cut, frame_right_cut;
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
-    frame_right_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
+    frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
     frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
     frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
