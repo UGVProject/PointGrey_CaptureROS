@@ -7,10 +7,15 @@
 #define FLEA3_STEREOCAM_H
 
 #include "../include/flea3Driver.h"
-#include "ros/ros.h"
+//ROS includes
+#include <ros/ros.h>
 #include <ros/console.h>
 #include <cv_bridge/cv_bridge.h>
+
+#include <sensor_msgs/Image.h>
+#include <sensor_msgs/image_encodings.h>
 #include <image_transport/image_transport.h>
+
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/video/video.hpp>
 // Include some useful constants for image encoding. Refer to:
@@ -27,7 +32,9 @@ namespace flea3 {
 class stereoCam {
 public:
   stereoCam();
+  
   virtual ~stereoCam();
+
   unsigned int scaleFactor;
 
   void loadParam(ros::NodeHandle &nh);
@@ -54,7 +61,7 @@ private:
   flea3Driver m_cam_left;
   flea3Driver m_cam_right;
   // publishers
-  image_transport::Publisher pub_2;
+  image_transport::Publisher pub_2,pub_left,pub_right;
   cv::Mat frame_left;
   cv::Mat frame_right;
   cv::Mat frame_2;
@@ -90,10 +97,19 @@ private:
   int64_t framecount;
   std::string topic_name_;
   std::string frame_id_;
+  std::string left_topic_name_;
+  std::string left_frame_id_;
+  std::string right_topic_name_;
+  std::string right_frame_id_;
   int loopFrequency_;
   bool quitSignal_;
 
   inline double imageTimeStampToSeconds(unsigned int uiRawTimestamp);
+
+  sensor_msgs::ImagePtr imageToROSmsg(cv::Mat img, const std::string encodingType, std::string frameId, ros::Time t);
+
+  void publishImage(cv::Mat img, image_transport::Publisher &pub_img, std::string img_frame_id, ros::Time t);
+
 };
 }
 

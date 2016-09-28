@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<launch>
+	<arg name="frameID"  default = "long_camera" />
+	<arg name="frameTopic"  default = "long/image_raw" />
+
+	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
+    <!-- <param name="left/Guid" value="15231263" /> -->
+	    <!-- <param name="left/Guid" value="15231263" />   remote 16243866  |    right  15231263    -->
+		<param name="left/Guid" value="16243866" />
+    <param name="right/Guid" value="15231263" />
+    <param name="image/width" value="1280" />
+    <param name="image/height" value="1024" />
+    <param name="shutter_speed" value="0.3" />
+    <param name="publish/frequency" value="50" />
+    <param name="publish/frame_id" value="$(arg frameID)" />
+    <param name="publish/topic_name" value="$(arg frameTopic)" />
+		<param name="publish/left_topic"            value="long/left/image_raw" />
+		<param name="publish/left_frame_id"         value="long_camera" />
+		<param name="publish/right_topic"           value="long/left/image_raw" />
+		<param name="publish/right_frame_id"        value="long_camera" />
+    <param name="roi/upbound" value="40" />
+    <param name="roi/downbound" value="40" />
+
+	</node>
+
+	<node pkg="rosbag" type="record" name="rosbag_record_cam" required="true" output="screen"
+	args="-o $(env HOME)/stereo_cam /long/image_raw" />
+</launch>

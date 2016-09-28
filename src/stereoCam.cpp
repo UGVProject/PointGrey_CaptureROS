@@ -16,10 +16,51 @@ stereoCam::~stereoCam() {
   //
 }
 
+sensor_msgs::ImagePtr stereoCam::imageToROSmsg(cv::Mat img, const std::string encodingType, std::string frameId, ros::Time t){
+    sensor_msgs::ImagePtr ptr = boost::make_shared<sensor_msgs::Image>();
+    sensor_msgs::Image& imgMessage = *ptr;
+    imgMessage.header.stamp = t;
+    imgMessage.header.frame_id = frameId;
+    imgMessage.height = img.rows;
+    imgMessage.width = img.cols;
+    imgMessage.encoding = encodingType;
+    int num = 1; //for endianness detection
+    imgMessage.is_bigendian = !(*(char *)&num == 1);
+    imgMessage.step = img.cols * img.elemSize();
+    size_t size = imgMessage.step * img.rows;
+    imgMessage.data.resize(size);
+
+    if (img.isContinuous())
+        memcpy((char*)(&imgMessage.data[0]), img.data, size);
+    else {
+        uchar* opencvData = img.data;
+        uchar* rosData = (uchar*)(&imgMessage.data[0]);
+        for (unsigned int i = 0; i < img.rows; i++) {
+            memcpy(rosData, opencvData, imgMessage.step);
+            rosData += imgMessage.step;
+            opencvData += img.step;
+        }
+    }
+    return ptr;
+}
+
+void stereoCam::publishImage(cv::Mat img, image_transport::Publisher &pub_img, std::string img_frame_id, ros::Time t) {
+    pub_img.publish(imageToROSmsg(img
+                                , sensor_msgs::image_encodings::MONO8
+                                , img_frame_id
+                                , t ));
+}
+
 void stereoCam::loadParam(ros::NodeHandle &nh) {
   // init publisher
   image_transport::ImageTransport it(nh);
   pub_2 = it.advertise(topic_name_, 30);
+  ROS_INFO_STREAM("Advertized on topic " << topic_name_);
+  pub_left = it.advertise(left_topic_name_, 1); //left
+  ROS_INFO_STREAM("Advertized on topic " << left_topic_name_);
+  pub_right = it.advertise(right_topic_name_, 1); //right
+  ROS_INFO_STREAM("Advertized on topic " << right_topic_name_);
+
   quitSignal_ = false;
   framecount = 0;
   // const int rzWidth = static_cast<int>(imgWidth_/2);
@@ -109,6 +150,24 @@ void stereoCam::run() {
   else
     ROS_WARN("Use default stereo frame topic: %s", topic_name_.c_str());
 
+  if(nh.getParam("publish/left_frame_id", left_frame_id_ ))
+    ROS_INFO("Get left stereo frame ID: %s", left_frame_id_.c_str());
+  else
+    ROS_WARN("Use default left stereo frame ID: %s", left_frame_id_.c_str());
+  if(nh.getParam("publish/left_topic", left_topic_name_ ))
+    ROS_INFO("Get left stereo frame topic: %s", left_topic_name_.c_str());
+  else
+    ROS_WARN("Use default left stereo frame topic: %s", left_topic_name_.c_str());
+
+  if(nh.getParam("publish/right_frame_id", right_frame_id_ ))
+    ROS_INFO("Get right stereo frame ID: %s", right_frame_id_.c_str());
+  else
+    ROS_WARN("Use default right stereo frame ID: %s", right_frame_id_.c_str());
+  if(nh.getParam("publish/right_topic", right_topic_name_ ))
+    ROS_INFO("Get right stereo frame topic: %s", right_topic_name_.c_str());
+  else
+    ROS_WARN("Use default right stereo frame topic: %s", right_topic_name_.c_str());
+
   // load parameters
   loadParam(nh);
   std::ofstream outputFile;
@@ -136,7 +195,7 @@ void stereoCam::run() {
   // wait
   sleep(1);
   // cv::namedWindow( topic_name_.c_str() );
-  sensor_msgs::ImagePtr image_msg;
+  // sensor_msgs::ImagePtr image_msg,image_msg_l,image_msg_r;
   // ros::Rate loop_rate(loopFrequency_);
   uint32_t counter = 0; // for display
   while (ros::ok && !cameraFault_ && !quitSignal_) {
@@ -149,21 +208,35 @@ void stereoCam::run() {
       } else {
           std::cout << "image retrieve image data wrong!" << std::endl;
       }
+
+    int combine_SubNumber = pub_2.getNumSubscribers();
+    int left_SubNumber = pub_left.getNumSubscribers();
+    int right_SubNumber = pub_right.getNumSubscribers();
+
+    ros::Time t = ros::Time::now();   // Get current time
     m_cam_right.getFrame(frame_right.data, imgSize_);
     m_cam_left.getFrame(frame_left.data, imgSize_);
       cv::Mat frame_left_cut, frame_right_cut;
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
     frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
-    frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
-    frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
-    // convert Matrix to image_msg
 
-    image_msg =
-        cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_2).toImageMsg();
-    image_msg->header.stamp = ros::Time::now();
-    image_msg->header.frame_id = frame_id_;
-    pub_2.publish(image_msg);
+
+    if(combine_SubNumber > 0){
+      frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
+      frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
+      // image_msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_2).toImageMsg();
+      publishImage(frame_2, pub_2, frame_id_, t);
+    }
+    if(left_SubNumber > 0){
+      // image_msg_l = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_left_cut).toImageMsg();
+      publishImage(frame_left_cut, pub_left, left_frame_id_, t);
+    }
+    if(right_SubNumber > 0){
+      // image_msg_r = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_right_cut).toImageMsg();
+      publishImage(frame_right_cut, pub_right, right_frame_id_, t);
+    }
+
     framecount++;
     if(framecount > 1)
     {
