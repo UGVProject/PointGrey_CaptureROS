@@ -20,7 +20,7 @@
 		<param name="publish/left_topic"            value="long/left/image_raw" />
 		<param name="publish/left_frame_id"         value="long_camera" />
 
-		<param name="publish/right_topic"           value="long/left/image_raw" />
+		<param name="publish/right_topic"           value="long/right/image_raw" />
 		<param name="publish/right_frame_id"        value="long_camera" />
 
     <param name="roi/upbound" value="20" />

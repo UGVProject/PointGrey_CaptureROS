@@ -10,7 +10,7 @@ stereoCam::stereoCam()
       uid_right(0),                                          // 15231302
       cameraFault_(false), imgWidth_(1280), imgHeight_(1024),
       imgSize_(1280 * 1024), frameTimeStamp_left(0), frameTimeStamp_right(0),
-      trigger_mode_value(0) {count_outof_sync = 0;}
+      trigger_mode_value(0) {count_outof_sync = 0; visualization = false;}
 
 stereoCam::~stereoCam() {
   //
@@ -107,67 +107,72 @@ void stereoCam::set_TriggerMode_value(unsigned int triggerMode) {
 //void stereoCam::setFrameId(const std::string frame_id) { frame_id_ = frame_id; }
 
 void stereoCam::run() {
-  ros::NodeHandle nh("~");
+  ros::NodeHandle nh;
+  ros::NodeHandle nh_s("~");
 
-  if(nh.getParam("image/width", imgWidth_))
+  if(nh_s.getParam("image/width", imgWidth_))
     ROS_INFO("image width: %d", imgWidth_);
   else
     ROS_WARN("Use default image width: %d", imgWidth_);
-  if(nh.getParam("image/height", imgHeight_))
+  if(nh_s.getParam("image/height", imgHeight_))
     ROS_INFO("image height: %d", imgHeight_);
   else
     ROS_WARN("Use default image height: %d", imgHeight_);
-  if(nh.getParam("roi/upbound", upbound))
+  if(nh_s.getParam("roi/upbound", upbound))
     ROS_INFO("image roi up boundary: %d", upbound);
   else
     ROS_WARN("Use default image roi upbound: %d", upbound);
-  if(nh.getParam("roi/downbound", downbound))
+  if(nh_s.getParam("roi/downbound", downbound))
     ROS_INFO("image roi down boundary: %d", downbound);
   else
     ROS_WARN("Use default image roi downbound: %d", downbound);
-  if(nh.getParam("left/Guid", uid_left))
+  if(nh_s.getParam("left/Guid", uid_left))
     ROS_INFO("left camera guid: %d", uid_left);
   else
     ROS_WARN("Use default left camera guid: %d", uid_left);
-  if(nh.getParam("right/Guid", uid_right))
+  if(nh_s.getParam("right/Guid", uid_right))
     ROS_INFO("right camera guid: %d", uid_right);
   else
     ROS_WARN("Use default right camera guid: %d", uid_right);
-  if(nh.getParam("shutter_speed", shuttle_speed))
+  if(nh_s.getParam("shutter_speed", shuttle_speed))
     ROS_INFO("shutter speed: %f", shuttle_speed);
   else
     ROS_WARN("Use default shutter speed: %f", shuttle_speed);
-  if(nh.getParam("publish/frequency", loopFrequency_))
+  if(nh_s.getParam("publish/frequency", loopFrequency_))
     ROS_INFO("publish loop frequency: %d", loopFrequency_);
   else
     ROS_WARN("Use default publish loop frequency: %d", loopFrequency_);
-  if(nh.getParam("publish/frame_id", frame_id_ ))
+  if(nh_s.getParam("publish/frame_id", frame_id_ ))
     ROS_INFO("Get stereo frame ID: %s", frame_id_.c_str());
   else
     ROS_WARN("Use default stereo frame ID: %s", frame_id_.c_str());
-  if(nh.getParam("publish/topic_name", topic_name_ ))
+  if(nh_s.getParam("publish/topic_name", topic_name_ ))
     ROS_INFO("Get stereo frame topic: %s", topic_name_.c_str());
   else
     ROS_WARN("Use default stereo frame topic: %s", topic_name_.c_str());
 
-  if(nh.getParam("publish/left_frame_id", left_frame_id_ ))
+  if(nh_s.getParam("publish/left_frame_id", left_frame_id_ ))
     ROS_INFO("Get left stereo frame ID: %s", left_frame_id_.c_str());
   else
     ROS_WARN("Use default left stereo frame ID: %s", left_frame_id_.c_str());
-  if(nh.getParam("publish/left_topic", left_topic_name_ ))
+  if(nh_s.getParam("publish/left_topic", left_topic_name_ ))
     ROS_INFO("Get left stereo frame topic: %s", left_topic_name_.c_str());
   else
     ROS_WARN("Use default left stereo frame topic: %s", left_topic_name_.c_str());
 
-  if(nh.getParam("publish/right_frame_id", right_frame_id_ ))
+  if(nh_s.getParam("publish/right_frame_id", right_frame_id_ ))
     ROS_INFO("Get right stereo frame ID: %s", right_frame_id_.c_str());
   else
     ROS_WARN("Use default right stereo frame ID: %s", right_frame_id_.c_str());
-  if(nh.getParam("publish/right_topic", right_topic_name_ ))
+  if(nh_s.getParam("publish/right_topic", right_topic_name_ ))
     ROS_INFO("Get right stereo frame topic: %s", right_topic_name_.c_str());
   else
     ROS_WARN("Use default right stereo frame topic: %s", right_topic_name_.c_str());
 
+  if(nh_s.getParam("cvmat_show", visualization))
+    ROS_INFO("Get visualization flag: %s",visualization? "true":"false");
+  else
+    ROS_WARN("Using default visualization flag: false!");
   // load parameters
   loadParam(nh);
   std::ofstream outputFile;
@@ -200,14 +205,19 @@ void stereoCam::run() {
   uint32_t counter = 0; // for display
   while (ros::ok && !cameraFault_ && !quitSignal_) {
 
-      if (m_cam_left.capture(frameTimeStamp_left)) {
-          if (m_cam_right.capture(frameTimeStamp_right)) {}
-          else {
-              std::cout << "image retrieve image data wrong!" << std::endl;
-          }
-      } else {
-          std::cout << "image retrieve image data wrong!" << std::endl;
-      }
+    boost::thread th1 (boost::bind(&flea3Driver::capture, &m_cam_left, frameTimeStamp_left));
+    boost::thread th2 (boost::bind(&flea3Driver::capture, &m_cam_right, frameTimeStamp_right));
+    th1.join();
+    th2.join();
+
+      // if (m_cam_left.capture(frameTimeStamp_left)) {
+      //     if (m_cam_right.capture(frameTimeStamp_right)) {}
+      //     else {
+      //         std::cout << "image retrieve image data wrong!" << std::endl;
+      //     }
+      // } else {
+      //     std::cout << "image retrieve image data wrong!" << std::endl;
+      // }
 
     int combine_SubNumber = pub_2.getNumSubscribers();
     int left_SubNumber = pub_left.getNumSubscribers();
@@ -220,14 +230,12 @@ void stereoCam::run() {
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
     frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
-
-
-    if(combine_SubNumber > 0){
+   if((combine_SubNumber > 0) || (visualization)){
       frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
       frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
       // image_msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_2).toImageMsg();
       publishImage(frame_2, pub_2, frame_id_, t);
-    }
+   }
     if(left_SubNumber > 0){
       // image_msg_l = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_left_cut).toImageMsg();
       publishImage(frame_left_cut, pub_left, left_frame_id_, t);
@@ -261,47 +269,49 @@ void stereoCam::run() {
     frameTimeStamp_left_old = frameSecond_left;
     frameTimeStamp_right_old = frameSecond_right;
 
-    cv::resize(frame_2, res, rzSize);
-    // display image once every 10 frames
-    if (counter >= 10) {
-      cv::imshow("press 's' to decrease shuttle, 'b' to increase shuttle, "
-                 "'ESC' to quit",
-                 res);
-      int key = cv::waitKey(1);
-      if (key == 27) {
-        break;
-      } else if (key == 115) // type "s"
-      {
-        std::cout << "You typed s " << std::endl;
-        if (shuttle_speed > 0.2) {
-          shuttle_speed = shuttle_speed - 0.3;
-          if ((m_cam_left.changeShuttleSpeed(shuttle_speed)) &&
-              (m_cam_right.changeShuttleSpeed(shuttle_speed))) {
-            std::cout << "shuttle speed deceased " << std::endl;
+    if(visualization){
+      cv::resize(frame_2, res, rzSize);
+      // display image once every 10 frames
+      if (counter >= 10) {
+        cv::imshow("press 's' to decrease shuttle, 'b' to increase shuttle, "
+                   "'ESC' to quit",
+                   res);
+        int key = cv::waitKey(1);
+        if (key == 27) {
+          break;
+        } else if (key == 115) // type "s"
+        {
+          std::cout << "You typed s " << std::endl;
+          if (shuttle_speed > 0.2) {
+            shuttle_speed = shuttle_speed - 0.3;
+            if ((m_cam_left.changeShuttleSpeed(shuttle_speed)) &&
+                (m_cam_right.changeShuttleSpeed(shuttle_speed))) {
+              std::cout << "shuttle speed deceased " << std::endl;
+            } else {
+              std::cout << "shuttle speed change failed! " << std::endl;
+            }
           } else {
-            std::cout << "shuttle speed change failed! " << std::endl;
+            std::cout << "shuttle speed is already very low! " << std::endl;
           }
-        } else {
-          std::cout << "shuttle speed is already very low! " << std::endl;
-        }
-      } else if (key == 98) // type "b"
-      {
-        std::cout << "You typed b " << std::endl;
-        if (shuttle_speed < 22) {
-          shuttle_speed = shuttle_speed + 0.3;
-          if ((m_cam_left.changeShuttleSpeed(shuttle_speed)) &&
-              (m_cam_right.changeShuttleSpeed(shuttle_speed))) {
-            std::cout << "shuttle speed increased " << std::endl;
+        } else if (key == 98) // type "b"
+        {
+          std::cout << "You typed b " << std::endl;
+          if (shuttle_speed < 22) {
+            shuttle_speed = shuttle_speed + 0.3;
+            if ((m_cam_left.changeShuttleSpeed(shuttle_speed)) &&
+                (m_cam_right.changeShuttleSpeed(shuttle_speed))) {
+              std::cout << "shuttle speed increased " << std::endl;
+            } else {
+              std::cout << "shuttle speed change failed! " << std::endl;
+            }
           } else {
-            std::cout << "shuttle speed change failed! " << std::endl;
+            std::cout << "shuttle speed is already very high! " << std::endl;
           }
-        } else {
-          std::cout << "shuttle speed is already very high! " << std::endl;
         }
+        counter = 0;
+      } else {
+        counter++;
       }
-      counter = 0;
-    } else {
-      counter++;
     }
 
     ros::spinOnce();
@@ -320,3 +330,9 @@ void stereoCam::stop() {
   ros::shutdown();
 }
 }
+
+// void stereoCam::GetImageData(flea3Driver &camera, unsigned int &timestamp)
+// {
+//   if (!camera.capture(timestamp))
+//     std::cout << "image retrieve image data wrong!" << std::endl;
+// }

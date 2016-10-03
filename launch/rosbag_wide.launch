@@ -16,7 +16,7 @@
     <param name="publish/topic_name" value="$(arg frameTopic)" />
 		<param name="publish/left_topic"            value="wide/left/image_raw" />
 		<param name="publish/left_frame_id"         value="wide_camera" />
-		<param name="publish/right_topic"           value="wide/left/image_raw" />
+		<param name="publish/right_topic"           value="wide/right/image_raw" />
 		<param name="publish/right_frame_id"        value="wide_camera" />
     <param name="roi/upbound" value="40" />
     <param name="roi/downbound" value="40" />

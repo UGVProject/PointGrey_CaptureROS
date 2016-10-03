@@ -87,7 +87,7 @@ namespace flea3 {
         return (res);
     }
 
-    bool flea3Driver::capture( unsigned int &captureTimestamp)
+    void flea3Driver::capture( unsigned int &captureTimestamp)
     {
       FlyCapture2::Error error;
       metadata = rawImage.GetMetadata();
@@ -95,11 +95,11 @@ namespace flea3 {
       error = cam.RetrieveBuffer( &rawImage );
       if (error != FlyCapture2::PGRERROR_OK) {
           std::cout << "image retrieve wrong\n" << std::endl;
-          return false;
+          // return false;
       }
-      else{
-        return true;
-      }
+      // else{
+      //   // return true;
+      // }
     }
 
     void flea3Driver::getFrame(unsigned char *imageData, unsigned int imageSize)

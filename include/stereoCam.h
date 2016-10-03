@@ -27,12 +27,15 @@
 #include <stdlib.h>
 #include <string>
 
+#include <boost/thread/thread.hpp>
+#include <boost/bind.hpp>
+
 namespace flea3 {
 
 class stereoCam {
 public:
   stereoCam();
-  
+
   virtual ~stereoCam();
 
   unsigned int scaleFactor;
@@ -66,6 +69,7 @@ private:
   cv::Mat frame_right;
   cv::Mat frame_2;
 //  cv::Mat frame_cut;
+  bool visualization;
   cv::Mat res;
   unsigned int frameTimeStamp_left;
   unsigned int frameTimeStamp_right;
@@ -110,6 +114,7 @@ private:
 
   void publishImage(cv::Mat img, image_transport::Publisher &pub_img, std::string img_frame_id, ros::Time t);
 
+  // void GetImageData(flea3Driver &camera, unsigned int &timestamp);
 };
 }
 

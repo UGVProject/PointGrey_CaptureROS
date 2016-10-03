@@ -46,7 +46,7 @@ public:
 
     void set_TriggerMode(unsigned int triggerMode);
 
-    bool capture( unsigned int &captureTimestamp);
+    void capture( unsigned int &captureTimestamp);
     void getFrame(unsigned char *imageData, unsigned int imageSize);
     // bool getFrame(unsigned char *imageData,
     //               unsigned int &captureTimestamp,
