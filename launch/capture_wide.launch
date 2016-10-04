@@ -10,6 +10,8 @@
     <param name="right/Guid" value="15231302" />
 
     <param name="cvmat_show" value="$(arg visualization)" />
+		<param name="showfrequency_ratio" value="2" />
+		<!--  under visualization true: show every ratio frames! -->
     <param name="image/width" value="1280" />
     <param name="image/height" value="1024" />
     <param name="shutter_speed" value="0.3" />

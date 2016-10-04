@@ -77,6 +77,7 @@ private:
   double frameSecond_right;
   int rzWidth;
   int rzHeight;
+  int frame_show_ratio;
   unsigned int num_camera;
   char timestampfile1[100];
   double frameTimeStamp_left_old;

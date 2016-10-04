@@ -2,12 +2,16 @@
 <launch>
 	<arg name="frameID"  default = "long_camera" />
 	<arg name="frameTopic"  default = "long/image_raw" />
+	<arg name="visualization" value="true"/>
 
 	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
     <!-- <param name="left/Guid" value="15231263" /> -->
 	    <!-- <param name="left/Guid" value="15231263" />   remote 16243866  |    right  15231263    -->
 		<param name="left/Guid" value="16243866" />
     <param name="right/Guid" value="15231263" />
+		<param name="cvmat_show" value="$(arg visualization)" />
+		<param name="showfrequency_ratio" value="2" />
+		<!--  under visualization true: show every ratio frames! -->
     <param name="image/width" value="1280" />
     <param name="image/height" value="1024" />
     <param name="shutter_speed" value="0.3" />
@@ -18,8 +22,8 @@
 		<param name="publish/left_frame_id"         value="long_camera" />
 		<param name="publish/right_topic"           value="long/right/image_raw" />
 		<param name="publish/right_frame_id"        value="long_camera" />
-    <param name="roi/upbound" value="40" />
-    <param name="roi/downbound" value="40" />
+    <param name="roi/upbound" value="20" />
+    <param name="roi/downbound" value="120" />
 
 	</node>
 

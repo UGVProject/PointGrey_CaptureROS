@@ -80,21 +80,6 @@ inline double stereoCam::imageTimeStampToSeconds(unsigned int uiRawTimestamp) {
                (((double)nCycleCount + ((double)nCycleOffset / 3072.0)) / 8000.0);
 }
 
-//void stereoCam::setGuid(const uint64_t guid_left, const uint64_t guid_right) {
-//  uid_left = guid_left;
-//  uid_right = guid_right;
-//}
-//void stereoCam::setShuttle(const double Shuttlespeed) {
-//  shuttle_speed = Shuttlespeed;
-//}
-//void stereoCam::setPublishFrequency(const double frequency) {
-//  loopFrequency_ = frequency;
-//}
-
-//void stereoCam::setTopicName(const std::string topic_name) {
-//  topic_name_ = topic_name;
-//}
-
 void stereoCam::setTXTName(char txtfile[]) {
   memcpy(timestampfile1, txtfile, sizeof(timestampfile1));
   //std::cout << "txtFilename is: " << timestampfile1 << std::endl;
@@ -114,6 +99,10 @@ void stereoCam::run() {
     ROS_INFO("image width: %d", imgWidth_);
   else
     ROS_WARN("Use default image width: %d", imgWidth_);
+  if(nh_s.getParam("showfrequency_ratio", frame_show_ratio))
+    ROS_INFO("show every %d frames", frame_show_ratio);
+  else
+    ROS_WARN("Use default show ratio: %d", frame_show_ratio);
   if(nh_s.getParam("image/height", imgHeight_))
     ROS_INFO("image height: %d", imgHeight_);
   else
@@ -210,38 +199,28 @@ void stereoCam::run() {
     th1.join();
     th2.join();
 
-      // if (m_cam_left.capture(frameTimeStamp_left)) {
-      //     if (m_cam_right.capture(frameTimeStamp_right)) {}
-      //     else {
-      //         std::cout << "image retrieve image data wrong!" << std::endl;
-      //     }
-      // } else {
-      //     std::cout << "image retrieve image data wrong!" << std::endl;
-      // }
-
+    ros::Time t = ros::Time::now();   // Get current time
     int combine_SubNumber = pub_2.getNumSubscribers();
     int left_SubNumber = pub_left.getNumSubscribers();
     int right_SubNumber = pub_right.getNumSubscribers();
 
-    ros::Time t = ros::Time::now();   // Get current time
+
     m_cam_right.getFrame(frame_right.data, imgSize_);
     m_cam_left.getFrame(frame_left.data, imgSize_);
       cv::Mat frame_left_cut, frame_right_cut;
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
     frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
-   if((combine_SubNumber > 0) || (visualization)){
-      frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
-      frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
-      // image_msg = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_2).toImageMsg();
+    frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
+    frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
+
+    if(combine_SubNumber > 0) {
       publishImage(frame_2, pub_2, frame_id_, t);
-   }
+    }
     if(left_SubNumber > 0){
-      // image_msg_l = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_left_cut).toImageMsg();
       publishImage(frame_left_cut, pub_left, left_frame_id_, t);
     }
     if(right_SubNumber > 0){
-      // image_msg_r = cv_bridge::CvImage(std_msgs::Header(), "mono8", frame_right_cut).toImageMsg();
       publishImage(frame_right_cut, pub_right, right_frame_id_, t);
     }
 
@@ -272,7 +251,7 @@ void stereoCam::run() {
     if(visualization){
       cv::resize(frame_2, res, rzSize);
       // display image once every 10 frames
-      if (counter >= 10) {
+      if (counter >= frame_show_ratio) {
         cv::imshow("press 's' to decrease shuttle, 'b' to increase shuttle, "
                    "'ESC' to quit",
                    res);
