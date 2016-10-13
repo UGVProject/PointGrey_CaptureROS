@@ -97,6 +97,7 @@ private:
   int upbound;
   int downbound;
   double shuttle_speed;
+  double bAuto;
   unsigned int trigger_mode_value;
   bool cameraFault_;
   int64_t framecount;

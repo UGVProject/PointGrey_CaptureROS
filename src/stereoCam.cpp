@@ -10,7 +10,7 @@ stereoCam::stereoCam()
       uid_right(0),                                          // 15231302
       cameraFault_(false), imgWidth_(1280), imgHeight_(1024),
       imgSize_(1280 * 1024), frameTimeStamp_left(0), frameTimeStamp_right(0),
-      trigger_mode_value(0) {count_outof_sync = 0; visualization = false;}
+      trigger_mode_value(0) {count_outof_sync = 0; visualization = false;bAuto = false;}
 
 stereoCam::~stereoCam() {
   //
@@ -123,6 +123,10 @@ void stereoCam::run() {
     ROS_INFO("right camera guid: %d", uid_right);
   else
     ROS_WARN("Use default right camera guid: %d", uid_right);
+  if(nh_s.getParam("auto_shutter", bAuto))
+    ROS_INFO("whether auto shutter: %s", bAuto? "true":"false");
+  else
+    ROS_WARN("Use default setting on shutter mode: false");
   if(nh_s.getParam("shutter_speed", shuttle_speed))
     ROS_INFO("shutter speed: %f", shuttle_speed);
   else
@@ -168,10 +172,14 @@ void stereoCam::run() {
   outputFile.open(timestampfile1);
   // init camera driver
   imgHeight_cut = imgHeight_ - upbound - downbound;
+
   m_cam_left.setShuttleSpeed(shuttle_speed);
   m_cam_right.setShuttleSpeed(shuttle_speed);
+  m_cam_left.set_ShutterMode(bAuto);
+  m_cam_right.set_ShutterMode(bAuto);
   m_cam_left.set_TriggerMode(trigger_mode_value);
   m_cam_right.set_TriggerMode(trigger_mode_value);
+
   frame_2 = cv::Mat(imgHeight_cut, imgWidth_ * 2, CV_8UC1);
   cv::Size rzSize(imgWidth_, rzHeight);
   // cv::Mat frame_left = frame_2(cv::Range::all() , cv::Range(1 , imgWidth_));
@@ -198,7 +206,14 @@ void stereoCam::run() {
     boost::thread th2 (boost::bind(&flea3Driver::capture, &m_cam_right, frameTimeStamp_right));
     th1.join();
     th2.join();
-
+      // if (m_cam_left.capture(frameTimeStamp_left)) {
+      //     if (m_cam_right.capture(frameTimeStamp_right)) {}
+      //     else {
+      //         std::cout << "image retrieve image data wrong!" << std::endl;
+      //     }
+      // } else {
+      //     std::cout << "image retrieve image data wrong!" << std::endl;
+      // }
     ros::Time t = ros::Time::now();   // Get current time
     int combine_SubNumber = pub_2.getNumSubscribers();
     int left_SubNumber = pub_left.getNumSubscribers();

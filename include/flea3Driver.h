@@ -40,6 +40,8 @@ public:
 
     void setShuttleSpeed(double shuttleSpeed);
 
+    void set_ShutterMode(bool bAuto);
+
     bool changeShuttleSpeed(double shuttleSpeed);
 
     bool shutdown();
@@ -72,6 +74,7 @@ private:
     unsigned int ShutterRegVal;
     double shutter_speed;
     bool isCameraReady;
+    bool isAuto;
     // bool isFrameAvailable;
 
     unsigned int width;

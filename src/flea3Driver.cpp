@@ -15,6 +15,7 @@ namespace flea3 {
             height(1024)
     {
         isCameraReady = 0;
+        isAuto = 0;
 //        std::cout<<"init mutexes\n";
 //        pthread_mutex_init(&cameraMutex, NULL);
 //        pthread_mutex_init(&quitMutex, NULL);
@@ -43,6 +44,11 @@ namespace flea3 {
             res = 0;
         }
         return res;
+    }
+
+    void flea3Driver::set_ShutterMode(bool bAuto)
+    {
+      isAuto = bAuto;
     }
 
     void flea3Driver::set_TriggerMode(unsigned int triggerMode)
@@ -153,12 +159,23 @@ namespace flea3 {
             std::cout << "GetCameraInfo Wrong!" << std::endl;
             errCount ++;
         }
-        camProperty.type = FlyCapture2::AUTO_EXPOSURE;
-        // camProperty.absControl = true;
-        camProperty.onePush = false;
-        camProperty.onOff = true;
-        camProperty.autoManualMode = true;
-        // camProperty.absValue = 5.3;
+        if(isAuto)
+        {
+          camProperty.type = FlyCapture2::AUTO_EXPOSURE;
+          // camProperty.absControl = true;
+          camProperty.onePush = false;
+          camProperty.onOff = true;
+          camProperty.autoManualMode = true;
+          // camProperty.absValue = 5.3;
+        }
+        else{
+          camProperty.type = FlyCapture2::SHUTTER;
+          camProperty.absControl = true;
+          camProperty.onePush = false;
+          camProperty.onOff = true;
+          camProperty.autoManualMode = false;
+          camProperty.absValue = shutter_speed;
+        }
         error = cam.SetProperty(&camProperty);
         if (error != FlyCapture2::PGRERROR_OK)
         {
@@ -166,20 +183,6 @@ namespace flea3 {
             std::cout << "setProperty Wrong" << std::endl;
             errCount ++;
         }
-
-        // camProperty.type = FlyCapture2::SHUTTER;
-        // camProperty.absControl = true;
-        // camProperty.onePush = false;
-        // camProperty.onOff = true;
-        // camProperty.autoManualMode = false;
-        // camProperty.absValue = shutter_speed;
-        // error = cam.SetProperty(&camProperty);
-        // if (error != FlyCapture2::PGRERROR_OK)
-        // {
-        //     std::cout << "setProperty Wrong" << std::endl;
-        //     errCount ++;
-        // }
-
         if(errCount == 0){ return 1; }
         else{ return 0;}
     }
