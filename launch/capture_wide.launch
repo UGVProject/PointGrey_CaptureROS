@@ -1,30 +1,37 @@
 <?xml version="1.0" ?>
 <launch>
-	<arg name="frameID"  default = "wide_camera" />
-	<arg name="frameTopic_combined"  default = "wide/image_raw" />
-  <arg name="visualization" value="true" />
-	<arg name="isauto" value="false" />
+	<!--<arg name="frameID"  default = "wide_camera" />-->
+	<!--<arg name="frameTopic_combined"  default = "wide/image_raw" />-->
+    <arg name="left_yaml" value="file://$(find flea3)/wide_left.yaml" />
+    <arg name="right_yaml" value="file://$(find flea3)/wide_right.yaml" />
+  	<arg name="visualization" value="true" />
+	<arg name="isauto" value="true" />
 
 	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
 
-		<param name="left/Guid" value="16243862" />
+	<param name="left/Guid" value="16243862" />
     <param name="right/Guid" value="15231302" />
     <param name="cvmat_show" value="$(arg visualization)" />
-		<param name="auto_shutter" value="$(arg isauto)" />
-		<param name="showfrequency_ratio" value="2" />
+	<param name="auto_shutter" value="$(arg isauto)" />
+	<param name="showfrequency_ratio" value="2" />
 		<!--  under visualization true: show every ratio frames! -->
     <param name="image/width" value="1280" />
     <param name="image/height" value="1024" />
-    <param name="shutter_speed" value="16.4" />
+    <param name="shutter_speed" value="0.5" />
     <param name="publish/frequency" value="50" />
-    <param name="publish/frame_id" value="$(arg frameID)" />
-    <param name="publish/topic_name" value="$(arg frameTopic_combined)" />
+    <!--<param name="publish/frame_id" value="$(arg frameID)" />-->
+    <!--<param name="publish/topic_name" value="$(arg frameTopic_combined)" />-->
 
-		<param name="publish/left_topic"            value="my_stereo/left/image_raw" />
-		<param name="publish/left_frame_id"         value="wide_camera" />
+	<param name="publish/left_topic"            value="wide/left/image_raw" />
+	<param name="publish/left_frame_id"         value="wide_camera" />
 
-		<param name="publish/right_topic"           value="my_stereo/right/image_raw" />
-		<param name="publish/right_frame_id"        value="wide_camera" />
+	<param name="publish/right_topic"           value="wide/right/image_raw" />
+	<param name="publish/right_frame_id"        value="wide_camera" />
+
+	<param name="calibration/left_yml"           value="$(arg left_yaml)" />
+    <param name="calibration/right_yml"           value="$(arg right_yaml)" />
+    <param name="calibration/cam_left_name"      value="wide/left" />
+    <param name="calibration/cam_right_name"      value="wide/right" />
 
     <param name="roi/upbound" value="60" />
     <param name="roi/downbound" value="120" />

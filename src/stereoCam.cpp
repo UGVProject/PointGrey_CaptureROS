@@ -10,7 +10,9 @@ stereoCam::stereoCam()
       uid_right(0),                                          // 15231302
       cameraFault_(false), imgWidth_(1280), imgHeight_(1024),
       imgSize_(1280 * 1024), frameTimeStamp_left(0), frameTimeStamp_right(0),
-      trigger_mode_value(0) {count_outof_sync = 0; visualization = false;bAuto = false;}
+      trigger_mode_value(0) {count_outof_sync = 0; visualization = false;bAuto = true;
+      left_cam_name ="wide/left";right_cam_name = "wide/right";left_calib_yml="file://$(find flea3)/wide_left.yaml";
+      right_calib_yml="file://$(find flea3)/wide_right.yaml";}
 
 stereoCam::~stereoCam() {
   //
@@ -44,21 +46,44 @@ sensor_msgs::ImagePtr stereoCam::imageToROSmsg(cv::Mat img, const std::string en
     return ptr;
 }
 
-void stereoCam::publishImage(cv::Mat img, image_transport::Publisher &pub_img, std::string img_frame_id, ros::Time t) {
+void stereoCam::publishImage(cv::Mat img, image_transport::CameraPublisher &pub_img, std::string img_frame_id, ros::Time t, sensor_msgs::CameraInfoPtr &info) {
     pub_img.publish(imageToROSmsg(img
                                 , sensor_msgs::image_encodings::MONO8
                                 , img_frame_id
-                                , t ));
+                                , t ), info);
 }
+
+//* \brief Publish the informations of a camera with a ros Publisher
+// * \param cam_info_msg : the information message to publish
+// * \param pub_cam_info : the publisher object to use
+// * \param t : the ros::Time to stamp the message
+// */
+//void publishCamInfo(sensor_msgs::CameraInfoPtr cam_info_msg, ros::Publisher pub_cam_info, ros::Time t, sensor_msgs::CameraInfoPtr &info) {
+//    static int seq = 0;
+//    cam_info_msg->header.stamp = t;
+//    cam_info_msg->header.seq = seq;
+//    pub_cam_info.publish(cam_info_msg);
+//    seq++;
+//}
+
+
+void fillCamInfo(sensor_msgs::CameraInfoPtr left_cam_info_msg, sensor_msgs::CameraInfoPtr right_cam_info_msg,
+                 std::string left_frame_id, std::string right_frame_id){
+
+
+}
+
 
 void stereoCam::loadParam(ros::NodeHandle &nh) {
   // init publisher
-  image_transport::ImageTransport it(nh);
-  pub_2 = it.advertise(topic_name_, 30);
-  ROS_INFO_STREAM("Advertized on topic " << topic_name_);
-  pub_left = it.advertise(left_topic_name_, 1); //left
+//  image_transport::ImageTransport it(nh);
+  lit_.reset(new image_transport::ImageTransport(nh));
+  rit_.reset(new image_transport::ImageTransport(nh));
+//  pub_2 = it.advertise(topic_name_, 30);
+//  ROS_INFO_STREAM("Advertized on topic " << topic_name_);
+  pub_left = lit_->advertiseCamera(left_topic_name_, 1); //left
   ROS_INFO_STREAM("Advertized on topic " << left_topic_name_);
-  pub_right = it.advertise(right_topic_name_, 1); //right
+  pub_right = rit_->advertiseCamera(right_topic_name_, 1); //right
   ROS_INFO_STREAM("Advertized on topic " << right_topic_name_);
 
   quitSignal_ = false;
@@ -95,6 +120,9 @@ void stereoCam::run() {
   ros::NodeHandle nh;
   ros::NodeHandle nh_s("~");
 
+
+
+
   if(nh_s.getParam("image/width", imgWidth_))
     ROS_INFO("image width: %d", imgWidth_);
   else
@@ -126,7 +154,7 @@ void stereoCam::run() {
   if(nh_s.getParam("auto_shutter", bAuto))
     ROS_INFO("whether auto shutter: %s", bAuto? "true":"false");
   else
-    ROS_WARN("Use default setting on shutter mode: false");
+    ROS_WARN("Use default setting on shutter mode: true");
   if(nh_s.getParam("shutter_speed", shuttle_speed))
     ROS_INFO("shutter speed: %f", shuttle_speed);
   else
@@ -135,14 +163,14 @@ void stereoCam::run() {
     ROS_INFO("publish loop frequency: %d", loopFrequency_);
   else
     ROS_WARN("Use default publish loop frequency: %d", loopFrequency_);
-  if(nh_s.getParam("publish/frame_id", frame_id_ ))
-    ROS_INFO("Get stereo frame ID: %s", frame_id_.c_str());
-  else
-    ROS_WARN("Use default stereo frame ID: %s", frame_id_.c_str());
-  if(nh_s.getParam("publish/topic_name", topic_name_ ))
-    ROS_INFO("Get stereo frame topic: %s", topic_name_.c_str());
-  else
-    ROS_WARN("Use default stereo frame topic: %s", topic_name_.c_str());
+//  if(nh_s.getParam("publish/frame_id", frame_id_ ))
+//    ROS_INFO("Get stereo frame ID: %s", frame_id_.c_str());
+//  else
+//    ROS_WARN("Use default stereo frame ID: %s", frame_id_.c_str());
+//  if(nh_s.getParam("publish/topic_name", topic_name_ ))
+//    ROS_INFO("Get stereo frame topic: %s", topic_name_.c_str());
+//  else
+//    ROS_WARN("Use default stereo frame topic: %s", topic_name_.c_str());
 
   if(nh_s.getParam("publish/left_frame_id", left_frame_id_ ))
     ROS_INFO("Get left stereo frame ID: %s", left_frame_id_.c_str());
@@ -162,12 +190,39 @@ void stereoCam::run() {
   else
     ROS_WARN("Use default right stereo frame topic: %s", right_topic_name_.c_str());
 
+  if(nh_s.getParam("calibration/left_yml", left_calib_yml))
+    ROS_INFO("Get left cam calibration info: %s", left_calib_yml.c_str());
+  else
+     ROS_WARN("Use default left cam calib info: %s", left_calib_yml.c_str());
+
+  if(nh_s.getParam("calibration/right_yml", right_calib_yml))
+     ROS_INFO("Get right cam calibration info: %s", right_calib_yml.c_str());
+  else
+     ROS_WARN("Use default right cam calib info: %s", right_calib_yml.c_str());
+
+  if(nh_s.getParam("calibration/cam_left_name", left_cam_name))
+    ROS_INFO("Get left cam name: %s", left_cam_name.c_str());
+  else
+    ROS_WARN("Use default left cam name: %s", left_cam_name.c_str());
+
+  if(nh_s.getParam("calibration/cam_right_name", right_cam_name))
+     ROS_INFO("Get right cam name: %s", right_cam_name.c_str());
+  else
+     ROS_WARN("Use default right cam name: %s", right_cam_name.c_str());
+
   if(nh_s.getParam("cvmat_show", visualization))
     ROS_INFO("Get visualization flag: %s",visualization? "true":"false");
   else
     ROS_WARN("Using default visualization flag: false!");
   // load parameters
   loadParam(nh);
+  left_info_mgr.reset(new camera_info_manager::CameraInfoManager(nh,left_cam_name, left_calib_yml));
+  right_info_mgr.reset(new camera_info_manager::CameraInfoManager(nh,right_cam_name, right_calib_yml));
+  left_cam_info_msg.reset(new sensor_msgs::CameraInfo(left_info_mgr->getCameraInfo()));
+  right_cam_info_msg.reset(new sensor_msgs::CameraInfo(right_info_mgr->getCameraInfo()));
+  left_cam_info_msg -> header.frame_id = left_frame_id_;
+  right_cam_info_msg -> header.frame_id = right_frame_id_;
+
   std::ofstream outputFile;
   outputFile.open(timestampfile1);
   // init camera driver
@@ -196,8 +251,6 @@ void stereoCam::run() {
 
   // wait
   sleep(1);
-  // cv::namedWindow( topic_name_.c_str() );
-  // sensor_msgs::ImagePtr image_msg,image_msg_l,image_msg_r;
   // ros::Rate loop_rate(loopFrequency_);
   uint32_t counter = 0; // for display
   while (ros::ok && !cameraFault_ && !quitSignal_) {
@@ -206,19 +259,11 @@ void stereoCam::run() {
     boost::thread th2 (boost::bind(&flea3Driver::capture, &m_cam_right, frameTimeStamp_right));
     th1.join();
     th2.join();
-      // if (m_cam_left.capture(frameTimeStamp_left)) {
-      //     if (m_cam_right.capture(frameTimeStamp_right)) {}
-      //     else {
-      //         std::cout << "image retrieve image data wrong!" << std::endl;
-      //     }
-      // } else {
-      //     std::cout << "image retrieve image data wrong!" << std::endl;
-      // }
+
     ros::Time t = ros::Time::now();   // Get current time
-    int combine_SubNumber = pub_2.getNumSubscribers();
+//    int combine_SubNumber = pub_2.getNumSubscribers();
     int left_SubNumber = pub_left.getNumSubscribers();
     int right_SubNumber = pub_right.getNumSubscribers();
-
 
     m_cam_right.getFrame(frame_right.data, imgSize_);
     m_cam_left.getFrame(frame_left.data, imgSize_);
@@ -226,17 +271,19 @@ void stereoCam::run() {
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
     frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
-    frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
-    frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
-
-    if(combine_SubNumber > 0) {
-      publishImage(frame_2, pub_2, frame_id_, t);
-    }
+//    if(combine_SubNumber > 0) {
+//      frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
+//      frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
+//        publishCamInfo(left_cam_info_msg, )
+//      publishImage(frame_2, pub_2, frame_id_, t);
+//    }
     if(left_SubNumber > 0){
-      publishImage(frame_left_cut, pub_left, left_frame_id_, t);
+//      publishCamInfo(left_cam_info_msg, pub_left_cam_info, t);
+      publishImage(frame_left_cut, pub_left, left_frame_id_, t, left_cam_info_msg);
     }
     if(right_SubNumber > 0){
-      publishImage(frame_right_cut, pub_right, right_frame_id_, t);
+//      publishCamInfo(right_cam_info_msg, pub_right_cam_info, t);
+      publishImage(frame_right_cut, pub_right, right_frame_id_, t, right_cam_info_msg);
     }
 
     framecount++;
