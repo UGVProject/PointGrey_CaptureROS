@@ -11,7 +11,7 @@ bool CreateDirectory(char *datestr, char *timestr);
 char timestampfile[100] ;
 
 int main(int32_t argc, char **argv) {
-  ros::init(argc, argv, "stereo_record_node");
+  ros::init(argc, argv, "stereo_record");
   double shutter_speed;
   int numberofoutsync;
   char datestr[10];

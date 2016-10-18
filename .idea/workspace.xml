@@ -2,30 +2,31 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
     <generated>
-      <config projectName="flea3" targetName="rosgraph_msgs_generate_messages_cpp" />
       <config projectName="flea3" targetName="std_msgs_generate_messages_cpp" />
-      <config projectName="flea3" targetName="std_msgs_generate_messages_lisp" />
       <config projectName="flea3" targetName="stereo_record_node" />
-      <config projectName="flea3" targetName="geometry_msgs_generate_messages_py" />
       <config projectName="flea3" targetName="roscpp_generate_messages_lisp" />
       <config projectName="flea3" targetName="download_extra_data" />
       <config projectName="flea3" targetName="doxygen" />
-      <config projectName="flea3" targetName="gtest_main" />
       <config projectName="flea3" targetName="rosgraph_msgs_generate_messages_py" />
-      <config projectName="flea3" targetName="tests" />
       <config projectName="flea3" targetName="sensor_msgs_generate_messages_py" />
       <config projectName="flea3" targetName="rosgraph_msgs_generate_messages_lisp" />
       <config projectName="flea3" targetName="run_tests" />
       <config projectName="flea3" targetName="sensor_msgs_generate_messages_cpp" />
       <config projectName="flea3" targetName="roscpp_generate_messages_cpp" />
-      <config projectName="flea3" targetName="geometry_msgs_generate_messages_lisp" />
       <config projectName="flea3" targetName="roscpp_generate_messages_py" />
       <config projectName="flea3" targetName="gtest" />
-      <config projectName="flea3" targetName="std_msgs_generate_messages_py" />
       <config projectName="flea3" targetName="sensor_msgs_generate_messages_lisp" />
       <config projectName="flea3" targetName="clean_test_results" />
       <config projectName="flea3" targetName="geometry_msgs_generate_messages_cpp" />
       <config projectName="flea3" targetName="flea3" />
+      <config projectName="flea3" targetName="rosgraph_msgs_generate_messages_cpp" />
+      <config projectName="flea3" targetName="std_msgs_generate_messages_lisp" />
+      <config projectName="flea3" targetName="geometry_msgs_generate_messages_py" />
+      <config projectName="flea3" targetName="gtest_main" />
+      <config projectName="flea3" targetName="tests" />
+      <config projectName="flea3" targetName="geometry_msgs_generate_messages_lisp" />
+      <config projectName="ros_record" targetName="stereo_record" />
+      <config projectName="flea3" targetName="std_msgs_generate_messages_py" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
@@ -35,15 +36,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e5d29c3-b82a-4bc3-b1b6-27caf22cb60f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/PointGrey_CaptureROS.iml" afterPath="$PROJECT_DIR$/.idea/PointGrey_CaptureROS.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/left.yaml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/right.yaml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/stereoCam.h" afterPath="$PROJECT_DIR$/include/stereoCam.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launch/capture_long.launch" afterPath="$PROJECT_DIR$/launch/capture_long.launch" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launch/capture_wide.launch" afterPath="$PROJECT_DIR$/launch/capture_wide.launch" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launch/rosbag_long.launch" afterPath="$PROJECT_DIR$/launch/rosbag_long.launch" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launch/rosbag_wide.launch" afterPath="$PROJECT_DIR$/launch/rosbag_wide.launch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stereoCam.cpp" afterPath="$PROJECT_DIR$/src/stereoCam.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.xml" afterPath="$PROJECT_DIR$/package.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
     </list>
     <ignored path="PointGrey_CaptureROS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,8 +70,8 @@
           <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="576">
-                  <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+                <state relative-caret-position="126">
+                  <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
                   <folding>
                     <element signature="e#0#22#0" expanded="true" />
                   </folding>
@@ -80,8 +82,8 @@
           <file leaf-file-name="stereoCam.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/stereoCam.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="221" column="81" selection-start-line="221" selection-start-column="81" selection-end-line="221" selection-end-column="81" />
+                <state relative-caret-position="-165">
+                  <caret line="233" column="37" selection-start-line="233" selection-start-column="37" selection-end-line="233" selection-end-column="37" />
                   <folding />
                 </state>
               </provider>
@@ -90,7 +92,7 @@
           <file leaf-file-name="flea3Driver.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/flea3Driver.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="885">
+                <state relative-caret-position="1332">
                   <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
                   <folding />
                 </state>
@@ -101,10 +103,10 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="stereoCam.h" pinned="false" current-in-tab="true">
+          <file leaf-file-name="stereoCam.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/stereoCam.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="546">
+                <state relative-caret-position="541">
                   <caret line="106" column="27" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="27" />
                   <folding>
                     <element signature="e#162#197#0" expanded="true" />
@@ -113,10 +115,40 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="package.xml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/package.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="36">
+                  <caret line="2" column="18" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="18" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="rosbag_long.launch" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/launch/rosbag_long.launch">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="216">
+                  <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="rosbag_wide.launch" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/launch/rosbag_wide.launch">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="234">
+                  <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="flea3Driver.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/flea3Driver.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="410">
+                <state relative-caret-position="846">
                   <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
                   <folding />
                 </state>
@@ -133,15 +165,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/launch/capture.launch" />
         <option value="$PROJECT_DIR$/src/flea3Driver.cpp" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/include/stereoCam.h" />
         <option value="$PROJECT_DIR$/src/stereoCam.cpp" />
-        <option value="$PROJECT_DIR$/launch/capture_long.launch" />
+        <option value="$PROJECT_DIR$/package.xml" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
         <option value="$PROJECT_DIR$/launch/capture_wide.launch" />
+        <option value="$PROJECT_DIR$/launch/capture_long.launch" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/launch/rosbag_long.launch" />
         <option value="$PROJECT_DIR$/launch/rosbag_wide.launch" />
       </list>
@@ -452,7 +485,11 @@
       <envs />
       <method />
     </configuration>
-    <list size="25">
+    <configuration default="false" name="stereo_record" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ros_record" TARGET_NAME="stereo_record" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ros_record" RUN_TARGET_NAME="stereo_record">
+      <envs />
+      <method />
+    </configuration>
+    <list size="26">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.clean_test_results" />
       <item index="2" class="java.lang.String" itemvalue="Application.download_extra_data" />
@@ -478,10 +515,14 @@
       <item index="22" class="java.lang.String" itemvalue="Application.tests" />
       <item index="23" class="java.lang.String" itemvalue="Application.gtest" />
       <item index="24" class="java.lang.String" itemvalue="Application.gtest_main" />
+      <item index="25" class="java.lang.String" itemvalue="Application.stereo_record" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -497,12 +538,13 @@
       <workItem from="1475129438243" duration="3730000" />
       <workItem from="1475137626722" duration="1000" />
       <workItem from="1475418734410" duration="12000" />
-      <workItem from="1476671363154" duration="14189000" />
+      <workItem from="1476671363154" duration="14363000" />
+      <workItem from="1476755475499" duration="1319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26233000" />
+    <option name="totallyTimeSpent" value="27726000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
@@ -546,6 +588,50 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stereoCam.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4194">
+          <caret line="233" column="37" selection-start-line="233" selection-start-column="37" selection-end-line="233" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/flea3Driver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1332">
+          <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/stereoCam.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#162#197#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/flea3Driver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
@@ -804,7 +890,7 @@
     <entry file="file://$PROJECT_DIR$/launch/capture.launch" />
     <entry file="file://$PROJECT_DIR$/src/flea3Driver.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
+        <state relative-caret-position="1332">
           <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
           <folding />
         </state>
@@ -818,67 +904,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/flea3Driver.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
+        <state relative-caret-position="846">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launch/rosbag_long.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launch/rosbag_wide.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launch/capture_long.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launch/capture_wide.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/stereoCam.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
+        <state relative-caret-position="541">
           <caret line="106" column="27" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="27" />
           <folding>
             <element signature="e#162#197#0" expanded="true" />
@@ -886,10 +922,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/stereoCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="221" column="81" selection-start-line="221" selection-start-column="81" selection-end-line="221" selection-end-column="81" />
+        <state relative-caret-position="-165">
+          <caret line="233" column="37" selection-start-line="233" selection-start-column="37" selection-end-line="233" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launch/capture_wide.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launch/capture_long.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launch/rosbag_long.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launch/rosbag_wide.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
           <folding />
         </state>
       </provider>

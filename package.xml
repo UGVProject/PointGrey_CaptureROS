@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>flea3</name>
+  <name>ros_record</name>
   <version>0.0.0</version>
   <description>The pointgrey publisher package</description>
   <author>Chris</author>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(flea3)
+project(ros_record)
 
 #unset(OpenCV_CONFIG_PATH CACHE)
 #unset(OpenCV_DIR CACHE)
@@ -36,11 +36,11 @@ include_directories(
 
 INCLUDE_DIRECTORIES( include ${catkin_INCLUDE_DIRS})
 
-add_executable( stereo_record_node ${SRC_LIST})
+add_executable( stereo_record ${SRC_LIST})
 
 add_library(flea3 ${SRC_LIST} )
 
-TARGET_LINK_LIBRARIES( stereo_record_node ${OpenCV_LIBS} ${catkin_LIBRARIES} flycapture )
+TARGET_LINK_LIBRARIES( stereo_record ${OpenCV_LIBS} ${catkin_LIBRARIES} flycapture )
 
 #unset(OpenCV_CONFIG_PATH CACHE)
 #unset(OpenCV_DIR CACHE)

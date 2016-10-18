@@ -7,7 +7,7 @@
   	<arg name="visualization" value="true" />
 	<arg name="isauto" value="true" />
 
-	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
+	<node name="stereo_record" pkg="ros_record" type="stereo_record output="screen" >
 
 	<param name="left/Guid" value="16243862" />
     <param name="right/Guid" value="15231302" />
