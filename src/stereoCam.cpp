@@ -127,6 +127,10 @@ void stereoCam::run() {
     ROS_INFO("shutter speed: %f", shuttle_speed);
   else
     ROS_WARN("Use default shutter speed: %f", shuttle_speed);
+  if(nh_s.getParam("scale", scale))
+    ROS_INFO("scale factor: %f", scale);
+  else
+    ROS_WARN("Use default scale factor: %f", scale);
   if(nh_s.getParam("publish/frequency", loopFrequency_))
     ROS_INFO("publish loop frequency: %d", loopFrequency_);
   else
@@ -207,15 +211,15 @@ void stereoCam::run() {
 
     m_cam_right.getFrame(frame_right.data, imgSize_);
     m_cam_left.getFrame(frame_left.data, imgSize_);
-      cv::Mat frame_left_cut, frame_right_cut,frame_left_save,frame_right_save;
+    cv::Mat frame_left_cut, frame_right_cut,frame_left_save,frame_right_save;
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
     frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
-    frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
-    frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
-
     cv::resize(frame_left_cut, frame_left_save, cv::Size(),scale,scale);
     cv::resize(frame_right_cut, frame_right_save, cv::Size(),scale,scale);
+
+    frame_left_save.copyTo(frame_2(cv::Rect(0, 0, imgWidth_*scale, imgHeight_cut * scale)));
+    frame_right_save.copyTo(frame_2(cv::Rect(imgWidth_ * scale, 0, imgWidth_ * scale, imgHeight_cut * scale)));
 
     if(combine_SubNumber > 0) {
       publishImage(frame_2, pub_2, frame_id_, t);

@@ -20,10 +20,11 @@ FIND_PACKAGE( OpenCV REQUIRED )
 #find_package(OpenCV REQUIRED HINTS /home/zh/softwares/opencv-3.1.0/install)
 
 catkin_package(
-        INCLUDE_DIRS include
-        LIBRARIES ${PROJECT_NAME} ${catkin_INCLUDE_DIRS}
-        CATKIN_DEPENDS roscpp
-        DEPENDS opencv)
+#        INCLUDE_DIRS include
+#        LIBRARIES ${PROJECT_NAME} ${catkin_INCLUDE_DIRS}
+#        CATKIN_DEPENDS roscpp
+#        DEPENDS opencv
+)
 
 include_directories(
         include
