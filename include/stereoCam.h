@@ -39,6 +39,7 @@ public:
   virtual ~stereoCam();
 
   unsigned int scaleFactor;
+  double scale;
 
   void loadParam(ros::NodeHandle &nh);
 

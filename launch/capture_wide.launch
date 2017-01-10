@@ -2,7 +2,7 @@
 <launch>
 	<arg name="frameID"  default = "wide_camera" />
 	<arg name="frameTopic"  default = "wide/image_raw" />
-  <arg name="visualization" value="true"/>
+  <arg name="visualization" value="false"/>
 
 	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
     <!-- <param name="left/Guid" value="15231263" />   remote 16243866  |    right  15231263    -->
@@ -19,15 +19,20 @@
     <param name="publish/frame_id" value="$(arg frameID)" />
     <param name="publish/topic_name" value="$(arg frameTopic)" />
 
-		<param name="publish/left_topic"            value="my_stereo/left/image_raw" />
+		<param name="publish/left_topic"            value="wide/left/image_raw" />
 		<param name="publish/left_frame_id"         value="wide_camera" />
 
-		<param name="publish/right_topic"           value="my_stereo/right/image_raw" />
-		<param name="publish/right_frame_id"        value="wide_camera" />
+		<param name="publish/right_topic"           value="wide/right/image_raw" />
+		<param name="publish/right_frame_id"        value="wide_camera/" />
 
     <param name="roi/upbound" value="60" />
     <param name="roi/downbound" value="120" />
 
+	</node>
+
+	<node pkg="myahrs_driver" type="myahrs_driver" name="myahrs_driver">
+		<param name="port" value="/dev/ttyACM0" />
+		<param name="baud_rate" value="115200" />
 	</node>
 
 </launch>

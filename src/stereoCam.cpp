@@ -10,7 +10,7 @@ stereoCam::stereoCam()
       uid_right(0),                                          // 15231302
       cameraFault_(false), imgWidth_(1280), imgHeight_(1024),
       imgSize_(1280 * 1024), frameTimeStamp_left(0), frameTimeStamp_right(0),
-      trigger_mode_value(0) {count_outof_sync = 0; visualization = false;}
+      trigger_mode_value(0),scale(0.5) {count_outof_sync = 0; visualization = false;}
 
 stereoCam::~stereoCam() {
   //
@@ -207,21 +207,24 @@ void stereoCam::run() {
 
     m_cam_right.getFrame(frame_right.data, imgSize_);
     m_cam_left.getFrame(frame_left.data, imgSize_);
-      cv::Mat frame_left_cut, frame_right_cut;
+      cv::Mat frame_left_cut, frame_right_cut,frame_left_save,frame_right_save;
     frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
     frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
 
     frame_left_cut.copyTo(frame_2(cv::Rect(0, 0, imgWidth_, imgHeight_cut)));
     frame_right_cut.copyTo(frame_2(cv::Rect(imgWidth_, 0, imgWidth_, imgHeight_cut)));
 
+    cv::resize(frame_left_cut, frame_left_save, cv::Size(),scale,scale);
+    cv::resize(frame_right_cut, frame_right_save, cv::Size(),scale,scale);
+
     if(combine_SubNumber > 0) {
       publishImage(frame_2, pub_2, frame_id_, t);
     }
     if(left_SubNumber > 0){
-      publishImage(frame_left_cut, pub_left, left_frame_id_, t);
+      publishImage(frame_left_save, pub_left, left_frame_id_, t);
     }
     if(right_SubNumber > 0){
-      publishImage(frame_right_cut, pub_right, right_frame_id_, t);
+      publishImage(frame_right_save, pub_right, right_frame_id_, t);
     }
 
     framecount++;
