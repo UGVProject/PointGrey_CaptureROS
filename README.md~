@@ -10,9 +10,9 @@ So just put it under catkin workspace -> src folder and catkin_make it~~
 # usage:
 
 ## Just show the captured stereo images
-roslaunch flea3 capture_long.launch
+roslaunch flea3 capture.launch
 
 
 ## Record rosbag
 
-roslaunch flea3 rosbag_long.launch
+roslaunch flea3 rosbag_capture.launch
