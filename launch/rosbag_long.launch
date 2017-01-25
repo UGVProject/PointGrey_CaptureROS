@@ -22,11 +22,11 @@
 		<param name="publish/left_frame_id"         value="long_camera" />
 		<param name="publish/right_topic"           value="long/right/image_raw" />
 		<param name="publish/right_frame_id"        value="long_camera" />
-    <param name="roi/upbound" value="20" />
+    <param name="roi/upbound" value="60" />
     <param name="roi/downbound" value="120" />
 
 	</node>
 
 	<node pkg="rosbag" type="record" name="rosbag_record_cam" required="true" output="screen"
-	args="-o $(env HOME)/stereo_cam /long/image_raw" />
+	args="-o $(env HOME)/stereo_cam /long/left/image_raw /long/right/image_raw" />
 </launch>

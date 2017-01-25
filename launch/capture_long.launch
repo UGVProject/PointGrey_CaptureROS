@@ -2,7 +2,7 @@
 <launch>
 	<arg name="frameID"  default = "long_camera" />
 	<arg name="frameTopic"  default = "long/image_raw" />
-	<arg name="visualization" value="true"/>
+	<arg name="visualization" value="false"/>
 
 	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
     <!-- <param name="left/Guid" value="15231263" />   remote 16243866  |    right  15231263    -->
