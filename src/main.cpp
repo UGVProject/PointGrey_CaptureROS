@@ -1,10 +1,4 @@
 #include "stereoCam.h"
-#include <iostream>
-#include <ros/ros.h>
-#include <time.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 
 using namespace std;
 bool CreateDirectory(char *datestr, char *timestr);
@@ -12,8 +6,8 @@ char timestampfile[100] ;
 
 int main(int32_t argc, char **argv) {
   ros::init(argc, argv, "stereo_record_node");
-  double shutter_speed;
-  int numberofoutsync;
+//  double shutter_speed;
+//  int numberofoutsync;
   char datestr[10];
   char timestr[10];
   time_t currentdate;
@@ -31,16 +25,13 @@ int main(int32_t argc, char **argv) {
     std::cout << "Directory is not created!" << std::endl;
     return -1;
   }
-  // std::cout << "txtFilename is: " << timestampfile << std::endl;
 
   flea3::stereoCam m_camera;
-//  m_camera.setGuid(15231263, 15231302); // left and right UID
-//  m_camera.setPublishFrequency(50);
 //  m_camera.setShuttle(shutter_speed);
 //  m_camera.setFrameId("wide_camera");
   m_camera.set_TriggerMode_value(0);
 //  m_camera.setTopicName("wide/image_raw");
-  m_camera.setTXTName(timestampfile);
+//  m_camera.setTXTName(timestampfile);
   m_camera.run();
 
   return 0;

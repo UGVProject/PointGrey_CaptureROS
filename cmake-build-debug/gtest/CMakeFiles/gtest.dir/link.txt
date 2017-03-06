@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -std=c++11 -g  -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/zh/catkin_ws/src/PointGrey_CaptureROS/cmake-build-debug/gtest/src -lpthread -Wl,-rpath,/home/zh/catkin_ws/src/PointGrey_CaptureROS/cmake-build-debug/gtest/src 

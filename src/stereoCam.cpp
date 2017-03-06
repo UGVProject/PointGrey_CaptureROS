@@ -10,7 +10,10 @@ stereoCam::stereoCam()
       uid_right(0),                                          // 15231302
       cameraFault_(false), imgWidth_(1280), imgHeight_(1024),
       imgSize_(1280 * 1024), frameTimeStamp_left(0), frameTimeStamp_right(0),
-      trigger_mode_value(0),scale(0.5) {count_outof_sync = 0; visualization = false;}
+      trigger_mode_value(0),scale(0.5) {
+//    count_outof_sync = 0;
+    visualization = false;
+    flag_pause = false;}
 
 stereoCam::~stereoCam() {
   //
@@ -62,7 +65,6 @@ void stereoCam::loadParam(ros::NodeHandle &nh) {
   ROS_INFO_STREAM("Advertized on topic " << right_topic_name_);
 
   quitSignal_ = false;
-  framecount = 0;
   // const int rzWidth = static_cast<int>(imgWidth_/2);
   // unsigned int rzHeight = static_cast<int>(imgHeight_/2);
   rzHeight = (imgHeight_ - upbound - downbound)/ 2;
@@ -168,8 +170,11 @@ void stereoCam::run() {
     ROS_WARN("Using default visualization flag: false!");
   // load parameters
   loadParam(nh);
-  std::ofstream outputFile;
-  outputFile.open(timestampfile1);
+    ///@debug
+//  framecount = 0;
+//  std::ofstream outputFile;
+//  outputFile.open(timestampfile1);
+
   // init camera driver
   imgHeight_cut = imgHeight_ - upbound - downbound;
   m_cam_left.setShuttleSpeed(shuttle_speed);
@@ -198,70 +203,71 @@ void stereoCam::run() {
   uint32_t counter = 0; // for display
   while (ros::ok && !cameraFault_ && !quitSignal_) {
 
-    boost::thread th1 (boost::bind(&flea3Driver::capture, &m_cam_left, frameTimeStamp_left));
-    boost::thread th2 (boost::bind(&flea3Driver::capture, &m_cam_right, frameTimeStamp_right));
-    th1.join();
-    th2.join();
+      ros::Time t = ros::Time::now();   // Get current time
+      int combine_SubNumber = pub_2.getNumSubscribers();
+      int left_SubNumber = pub_left.getNumSubscribers();
+      int right_SubNumber = pub_right.getNumSubscribers();
 
-    ros::Time t = ros::Time::now();   // Get current time
-    int combine_SubNumber = pub_2.getNumSubscribers();
-    int left_SubNumber = pub_left.getNumSubscribers();
-    int right_SubNumber = pub_right.getNumSubscribers();
+      if(!flag_pause) {
+          boost::thread th1(boost::bind(&flea3Driver::capture, &m_cam_left, frameTimeStamp_left));
+          boost::thread th2(boost::bind(&flea3Driver::capture, &m_cam_right, frameTimeStamp_right));
+          th1.join();
+          th2.join();
 
+          m_cam_right.getFrame(frame_right.data, imgSize_);
+          m_cam_left.getFrame(frame_left.data, imgSize_);
+      }
+      cv::Mat frame_left_cut, frame_right_cut, frame_left_save, frame_right_save;
+      frame_left_cut = frame_left(cv::Range(upbound, imgHeight_ - downbound), cv::Range::all());
+      frame_right_cut = frame_right(cv::Range(upbound, imgHeight_ - downbound), cv::Range::all());
 
-    m_cam_right.getFrame(frame_right.data, imgSize_);
-    m_cam_left.getFrame(frame_left.data, imgSize_);
-    cv::Mat frame_left_cut, frame_right_cut,frame_left_save,frame_right_save;
-    frame_left_cut = frame_left( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
-    frame_right_cut = frame_right( cv::Range(upbound, imgHeight_ - downbound), cv::Range::all() );
+      cv::resize(frame_left_cut, frame_left_save, cv::Size(), scale, scale);
+      cv::resize(frame_right_cut, frame_right_save, cv::Size(), scale, scale);
 
-    cv::resize(frame_left_cut, frame_left_save, cv::Size(),scale,scale);
-    cv::resize(frame_right_cut, frame_right_save, cv::Size(),scale,scale);
+      frame_left_save.copyTo(frame_2(cv::Rect(0, 0, imgWidth_ * scale, imgHeight_cut * scale)));
+      frame_right_save.copyTo(frame_2(cv::Rect(imgWidth_ * scale, 0, imgWidth_ * scale, imgHeight_cut * scale)));
 
-    frame_left_save.copyTo(frame_2(cv::Rect(0, 0, imgWidth_*scale, imgHeight_cut * scale)));
-    frame_right_save.copyTo(frame_2(cv::Rect(imgWidth_ * scale, 0, imgWidth_ * scale, imgHeight_cut * scale)));
+      if (combine_SubNumber > 0) {
+          publishImage(frame_2, pub_2, frame_id_, t);
+      }
+      if (left_SubNumber > 0) {
+          publishImage(frame_left_save, pub_left, left_frame_id_, t);
+      }
+      if (right_SubNumber > 0) {
+          publishImage(frame_right_save, pub_right, right_frame_id_, t);
+      }
 
-    if(combine_SubNumber > 0) {
-      publishImage(frame_2, pub_2, frame_id_, t);
-    }
-    if(left_SubNumber > 0){
-      publishImage(frame_left_save, pub_left, left_frame_id_, t);
-    }
-    if(right_SubNumber > 0){
-      publishImage(frame_right_save, pub_right, right_frame_id_, t);
-    }
-
-    framecount++;
-    if(framecount > 1)
-    {
-            frameSecond_left = imageTimeStampToSeconds(frameTimeStamp_left);
-            frameSecond_right = imageTimeStampToSeconds(frameTimeStamp_right);
-
-            left_show_time = frameSecond_left - frameTimeStamp_left_old;
-            // left_show_time = frameTimeStamp_left;
-            right_show_time = frameSecond_right - frameTimeStamp_right_old;
-            // right_show_time = frameTimeStamp_right;
-            difference = left_show_time - right_show_time;
-            if((difference >= 0.01)||(difference <= -0.01))
-            {
-              count_outof_sync ++;
-              std::cout << "Out of sync : " << count_outof_sync << " Difference is: " << difference << std::endl;
-            }
-
-            // difference = frameSecond_left - frameSecond_right;
-            outputFile << framecount << "frame: Left image difference: " << left_show_time
-                       << " | Right image difference: " << right_show_time << " |difference: " << difference << std::endl;
-    }
-    frameTimeStamp_left_old = frameSecond_left;
-    frameTimeStamp_right_old = frameSecond_right;
+      ///@debug
+//    framecount++;
+//    if(framecount > 1)
+//    {
+//            frameSecond_left = imageTimeStampToSeconds(frameTimeStamp_left);
+//            frameSecond_right = imageTimeStampToSeconds(frameTimeStamp_right);
+//
+//            left_show_time = frameSecond_left - frameTimeStamp_left_old;
+//            // left_show_time = frameTimeStamp_left;
+//            right_show_time = frameSecond_right - frameTimeStamp_right_old;
+//            // right_show_time = frameTimeStamp_right;
+//            difference = left_show_time - right_show_time;
+//            if((difference >= 0.01)||(difference <= -0.01))
+//            {
+//              count_outof_sync ++;
+//              std::cout << "Out of sync : " << count_outof_sync << " Difference is: " << difference << std::endl;
+//            }
+//
+//            // difference = frameSecond_left - frameSecond_right;
+//            outputFile << framecount << "frame: Left image difference: " << left_show_time
+//                       << " | Right image difference: " << right_show_time << " |difference: " << difference << std::endl;
+//    }
+//    frameTimeStamp_left_old = frameSecond_left;
+//    frameTimeStamp_right_old = frameSecond_right;
 
     if(visualization){
-      cv::resize(frame_2, res, rzSize);
+//      cv::resize(frame_2, res, rzSize);
       // display image once every 10 frames
       if (counter >= frame_show_ratio) {
         cv::imshow("press 's' to decrease shuttle, 'b' to increase shuttle, "
-                   "'ESC' to quit",
-                   res);
+                   "'ESC' to quit, 'p' to pause.", frame_2);
         int key = cv::waitKey(1);
         if (key == 27) {
           break;
@@ -294,6 +300,16 @@ void stereoCam::run() {
             std::cout << "shuttle speed is already very high! " << std::endl;
           }
         }
+          else if(key == 112) // type "p"
+        {
+            if(flag_pause){
+                flag_pause = false;
+                std::cout << "Resume~~~~~~" << std::endl;
+            }else{
+                flag_pause = true;
+                std::cout << "Pause~" << std::endl;
+            }
+        }
         counter = 0;
       } else {
         counter++;
@@ -303,11 +319,11 @@ void stereoCam::run() {
     ros::spinOnce();
 //    loop_rate.sleep();
   }
-  std::cout << "Altogether:  " << framecount << " frames" << std::endl;
-  std::cout << "Stopping camera! Out of sync number is : " << count_outof_sync << std::endl;
+//  std::cout << "Altogether:  " << framecount << " frames" << std::endl;
+//  std::cout << "Stopping camera! Out of sync number is : " << count_outof_sync << std::endl;
   m_cam_left.shutdown();
   m_cam_right.shutdown();
-  outputFile.close();
+//  outputFile.close();
   stop();
 }
 

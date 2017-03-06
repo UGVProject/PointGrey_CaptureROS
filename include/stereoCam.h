@@ -71,6 +71,7 @@ private:
   cv::Mat frame_2;
 //  cv::Mat frame_cut;
   bool visualization;
+  bool flag_pause;
   cv::Mat res;
   unsigned int frameTimeStamp_left;
   unsigned int frameTimeStamp_right;

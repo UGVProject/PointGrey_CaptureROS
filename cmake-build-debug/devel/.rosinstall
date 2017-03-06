@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/zh/catkin_ws/src/PointGrey_CaptureROS/cmake-build-debug/devel/setup.sh

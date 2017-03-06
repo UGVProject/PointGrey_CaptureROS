@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: flea3
+Description: Description of flea3
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 

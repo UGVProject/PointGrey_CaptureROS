@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC  -std=c++11 -g  -shared -Wl,-soname,libflea3.so -o devel/lib/libflea3.so CMakeFiles/flea3.dir/src/main.cpp.o CMakeFiles/flea3.dir/src/flea3Driver.cpp.o CMakeFiles/flea3.dir/src/stereoCam.cpp.o 

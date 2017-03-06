@@ -1,0 +1,8 @@
+prefix=/home/zh/catkin_ws/src/PointGrey_CaptureROS/cmake-build-debug/devel
+
+Name: flea3
+Description: Description of flea3
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/zh/catkin_ws/src/PointGrey_CaptureROS/cmake-build-debug/devel/lib 
+Requires: 
