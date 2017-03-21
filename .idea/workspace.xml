@@ -45,14 +45,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e5d29c3-b82a-4bc3-b1b6-27caf22cb60f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/catkin_generated/setup_cached.sh" afterPath="$PROJECT_DIR$/cmake-build-debug/catkin_generated/setup_cached.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/stereoCam.h" afterPath="$PROJECT_DIR$/include/stereoCam.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launch/capture_long.launch" afterPath="$PROJECT_DIR$/launch/capture_long.launch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.xml" afterPath="$PROJECT_DIR$/package.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stereoCam.cpp" afterPath="$PROJECT_DIR$/src/stereoCam.cpp" />
     </list>
     <ignored path="PointGrey_CaptureROS.iws" />
@@ -77,8 +70,8 @@
       <file leaf-file-name="stereoCam.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/stereoCam.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="93" column="2" lean-forward="false" selection-start-line="93" selection-start-column="2" selection-end-line="93" selection-end-column="2" />
+            <state relative-caret-position="640">
+              <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
               <folding>
                 <element signature="e#213#233#0" expanded="true" />
               </folding>
@@ -99,8 +92,8 @@
       <file leaf-file-name="stereoCam.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/stereoCam.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="197" column="73" lean-forward="false" selection-start-line="197" selection-start-column="73" selection-end-line="197" selection-end-column="73" />
+            <state relative-caret-position="363">
+              <caret line="266" column="37" lean-forward="true" selection-start-line="266" selection-start-column="37" selection-end-line="266" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -148,11 +141,11 @@
         <option value="$PROJECT_DIR$/cfg/long_cam.yaml" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/package.xml" />
-        <option value="$PROJECT_DIR$/include/stereoCam.h" />
-        <option value="$PROJECT_DIR$/src/stereoCam.cpp" />
         <option value="$PROJECT_DIR$/launch/capture_long.launch" />
         <option value="$PROJECT_DIR$/cfg/long_camera_left.yaml" />
         <option value="$PROJECT_DIR$/cfg/long_camera_right.yaml" />
+        <option value="$PROJECT_DIR$/src/stereoCam.cpp" />
+        <option value="$PROJECT_DIR$/include/stereoCam.h" />
       </list>
     </option>
   </component>
@@ -162,6 +155,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="24" />
@@ -631,12 +625,12 @@
       <workItem from="1488771494409" duration="2519000" />
       <workItem from="1488942735284" duration="30000" />
       <workItem from="1490001583700" duration="1393000" />
-      <workItem from="1490063544552" duration="8387000" />
+      <workItem from="1490063544552" duration="9706000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25787000" />
+    <option name="totallyTimeSpent" value="27106000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
@@ -684,14 +678,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="26" lean-forward="false" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/stereoCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -1019,16 +1005,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/stereoCam.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="93" column="2" lean-forward="false" selection-start-line="93" selection-start-column="2" selection-end-line="93" selection-end-column="2" />
-          <folding>
-            <element signature="e#213#233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///opt/ros/kinetic/include/camera_info_manager/camera_info_manager.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
@@ -1061,10 +1037,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///opt/ros/kinetic/include/image_transport/camera_publisher.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="92" column="7" lean-forward="false" selection-start-line="92" selection-start-column="7" selection-end-line="92" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/stereoCam.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding>
+            <element signature="e#213#233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/stereoCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="197" column="73" lean-forward="false" selection-start-line="197" selection-start-column="73" selection-end-line="197" selection-end-column="73" />
+        <state relative-caret-position="363">
+          <caret line="266" column="37" lean-forward="true" selection-start-line="266" selection-start-column="37" selection-end-line="266" selection-end-column="37" />
           <folding />
         </state>
       </provider>

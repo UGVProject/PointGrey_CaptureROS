@@ -50,13 +50,12 @@ sensor_msgs::ImagePtr stereoCam::imageToROSmsg(cv::Mat img, const std::string en
     return ptr;
 }
 
-void stereoCam::publishImage(cv::Mat img, image_transport::Publisher &pub_img, std::string img_frame_id, ros::Time t) {
+void stereoCam::publishImage(cv::Mat img, image_transport::CameraPublisher &pub_img, std::string img_frame_id, ros::Time t, sensor_msgs::CameraInfoPtr &info) {
     pub_img.publish(imageToROSmsg(img
-                                , sensor_msgs::image_encodings::MONO8
-                                , img_frame_id
-                                , t ));
+            , sensor_msgs::image_encodings::MONO8
+            , img_frame_id
+            , t ), info);
 }
-
 void stereoCam::loadParam(ros::NodeHandle &nh) {
   // init publisher
   image_transport::ImageTransport it(nh);
@@ -268,10 +267,10 @@ void stereoCam::run() {
           publishImage(frame_2, pub_2, frame_id_, t);
       }
       if (left_SubNumber > 0) {
-          publishImage(frame_left_save, pub_left, left_frame_id_, t);
+          publishImage(frame_left_save, pub_left, left_frame_id_, t, left_cam_info_msg);
       }
       if (right_SubNumber > 0) {
-          publishImage(frame_right_save, pub_right, right_frame_id_, t);
+          publishImage(frame_right_save, pub_right, right_frame_id_, t, right_cam_info_msg);
       }
 
       ///@debug
