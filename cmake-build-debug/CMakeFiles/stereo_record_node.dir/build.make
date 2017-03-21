@@ -169,6 +169,7 @@ devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libopencv_videostab3.so
 devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libopencv_superres3.so.3.1.0
 devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libopencv_stitching3.so.3.1.0
 devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libopencv_photo3.so.3.1.0
+devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libcamera_info_manager.so
 devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libcv_bridge.so
 devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libopencv_xphoto3.so.3.1.0
 devel/lib/flea3/stereo_record_node: /opt/ros/kinetic/lib/libopencv_xobjdetect3.so.3.1.0

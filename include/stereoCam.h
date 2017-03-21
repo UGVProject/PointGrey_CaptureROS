@@ -11,22 +11,19 @@
 #include <ros/ros.h>
 #include <ros/console.h>
 #include <cv_bridge/cv_bridge.h>
-
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/CameraInfo.h>
+#include <camera_info_manager/camera_info_manager.h>
+#include <sensor_msgs/distortion_models.h>
 #include <image_transport/image_transport.h>
-
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/video/video.hpp>
-// Include some useful constants for image encoding. Refer to:
-// http://www.ros.org/doc/api/sensor_msgs/html/namespacesensor__msgs_1_1image__encodings.html
-// for more info.
 #include <iostream>
 #include <fstream>
 #include <sensor_msgs/image_encodings.h>
 #include <stdlib.h>
 #include <string>
-
 #include <boost/thread/thread.hpp>
 #include <boost/bind.hpp>
 
@@ -66,6 +63,9 @@ private:
   flea3Driver m_cam_right;
   // publishers
   image_transport::Publisher pub_2,pub_left,pub_right;
+  ros::Publisher pub_left_cam_info, pub_right_cam_info;
+  sensor_msgs::CameraInfoPtr left_cam_info_msg, right_cam_info_msg;
+  boost::shared_ptr<camera_info_manager::CameraInfoManager> left_info_mgr, right_info_mgr;
   cv::Mat frame_left;
   cv::Mat frame_right;
   cv::Mat frame_2;
@@ -90,8 +90,8 @@ private:
   double difference;
   unsigned int count_outof_sync;
   // parameters
-  int uid_left;
-  int uid_right;
+  std::string uid_left;
+  std::string uid_right;
   int imgWidth_;
   int imgHeight_;
   int imgHeight_cut;
@@ -108,6 +108,12 @@ private:
   std::string left_frame_id_;
   std::string right_topic_name_;
   std::string right_frame_id_;
+  std::string left_cam_info_topic_;
+  std::string right_cam_info_topic_;
+  std::string left_calib_url;
+  std::string right_calib_url;
+  std::string left_cam_name;
+  std::string right_cam_name;
   int loopFrequency_;
   bool quitSignal_;
 
@@ -117,6 +123,10 @@ private:
 
   void publishImage(cv::Mat img, image_transport::Publisher &pub_img, std::string img_frame_id, ros::Time t);
 
+  void fillCamInfo(sensor_msgs::CameraInfoPtr left_cam_info_msg, sensor_msgs::CameraInfoPtr right_cam_info_msg,
+        std::string left_frame_id, std::string right_frame_id);
+
+  void publishCamInfo(sensor_msgs::CameraInfoPtr cam_info_msg, ros::Publisher pub_cam_info, ros::Time t) ;
   // void GetImageData(flea3Driver &camera, unsigned int &timestamp);
 };
 }

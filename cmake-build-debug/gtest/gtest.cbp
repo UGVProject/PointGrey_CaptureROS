@@ -5,7 +5,7 @@
 		<Option title="gtest"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\opt\ros\;CMake Files\..\..\..\..\..\opt\ros\kinetic\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\platform\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\test\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\tools\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\templates\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\em\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cpp_common\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cpp_common\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_runtime\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_runtime\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_serialization\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_serialization\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_traits\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_traits\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\std_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\std_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\image_transport\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\image_transport\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_filters\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_filters\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\pluginlib\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\pluginlib\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\class_loader\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\class_loader\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roslib\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roslib\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rospy\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rospy\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\OpenCV-3.1.0-dev\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\src\;CMake Files\..\..\..\..\..\usr\src\gtest\;CMake Files\..\..\..\..\..\usr\src\gtest\cmake\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\catkin\;CMake Files\cmake-build-debug\catkin\catkin_generated\;CMake Files\cmake-build-debug\catkin\catkin_generated\version\;CMake Files\cmake-build-debug\catkin_generated\;CMake Files\cmake-build-debug\catkin_generated\installspace\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\opt\;CMake Files\..\..\..\..\..\opt\ros\;CMake Files\..\..\..\..\..\opt\ros\kinetic\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\platform\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\test\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\tools\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\templates\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\em\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\camera_info_manager\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\camera_info_manager\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cpp_common\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cpp_common\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_runtime\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_runtime\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_serialization\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_serialization\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_traits\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_traits\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\std_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\std_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\image_transport\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\image_transport\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_filters\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_filters\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\pluginlib\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\pluginlib\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\class_loader\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\class_loader\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roslib\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roslib\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rospy\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rospy\cmake\;CMake Files\..\..\..\..\..\opt\ros\kinetic\share\OpenCV-3.1.0-dev\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\src\;CMake Files\..\..\..\..\..\usr\src\gtest\;CMake Files\..\..\..\..\..\usr\src\gtest\cmake\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\catkin\;CMake Files\cmake-build-debug\catkin\catkin_generated\;CMake Files\cmake-build-debug\catkin\catkin_generated\version\;CMake Files\cmake-build-debug\catkin_generated\;CMake Files\cmake-build-debug\catkin_generated\installspace\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/zh/catkin_ws/src/PointGrey_CaptureROS/cmake-build-debug/gtest"/>
@@ -324,50 +324,32 @@
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/catkin/cmake/em/pkg.pc.em">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\catkin\cmake\em\"/>
 		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/cv_bridge/cmake/cv_bridgeConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\cmake\"/>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/camera_info_manager/cmake/camera_info_managerConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\camera_info_manager\cmake\"/>
 		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/cv_bridge/cmake/cv_bridgeConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\cmake\"/>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/camera_info_manager/cmake/camera_info_managerConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\camera_info_manager\cmake\"/>
 		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosconsole/cmake/rosconsoleConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\"/>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
 		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosconsole/cmake/rosconsoleConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\"/>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
 		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosconsole/cmake/rosconsole-extras.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\"/>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscpp-msg-extras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
 		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/cpp_common/cmake/cpp_commonConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cpp_common\cmake\"/>
 		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/cpp_common/cmake/cpp_commonConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cpp_common\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rostime/cmake/rostimeConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rostime/cmake/rostimeConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/sensor_msgs/cmake/sensor_msgsConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/sensor_msgs/cmake/sensor_msgsConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/sensor_msgs/cmake/sensor_msgs-msg-extras.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/geometry_msgs/cmake/geometry_msgsConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/geometry_msgs/cmake/geometry_msgsConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/geometry_msgs/cmake/geometry_msgs-msg-extras.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\"/>
 		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/message_runtime/cmake/message_runtimeConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_runtime\cmake\"/>
@@ -387,6 +369,30 @@
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp_traits/cmake/roscpp_traitsConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp_traits\cmake\"/>
 		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rostime/cmake/rostimeConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rostime/cmake/rostimeConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rostime\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosconsole/cmake/rosconsoleConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosconsole/cmake/rosconsoleConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosconsole/cmake/rosconsole-extras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosconsole\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosgraph_msgs/cmake/rosgraph_msgsConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosgraph_msgs/cmake/rosgraph_msgsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosgraph_msgs/cmake/rosgraph_msgs-msg-extras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\"/>
+		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/std_msgs/cmake/std_msgsConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\std_msgs\cmake\"/>
 		</Unit>
@@ -402,6 +408,36 @@
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/std_msgs/cmake/std_msgsConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\std_msgs\cmake\"/>
 		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/xmlrpcpp/cmake/xmlrpcppConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/xmlrpcpp/cmake/xmlrpcppConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/sensor_msgs/cmake/sensor_msgsConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/sensor_msgs/cmake/sensor_msgsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/sensor_msgs/cmake/sensor_msgs-msg-extras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\sensor_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/geometry_msgs/cmake/geometry_msgsConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/geometry_msgs/cmake/geometry_msgsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/geometry_msgs/cmake/geometry_msgs-msg-extras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\geometry_msgs\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/cv_bridge/cmake/cv_bridgeConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\cmake\"/>
+		</Unit>
+		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/cv_bridge/cmake/cv_bridgeConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\cv_bridge\cmake\"/>
+		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/image_transport/cmake/image_transportConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\image_transport\cmake\"/>
 		</Unit>
@@ -413,36 +449,6 @@
 		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/message_filters/cmake/message_filtersConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\message_filters\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscpp-msg-extras.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/roscpp/cmake/roscppConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\roscpp\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosgraph_msgs/cmake/rosgraph_msgsConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosgraph_msgs/cmake/rosgraph_msgsConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/rosgraph_msgs/cmake/rosgraph_msgs-msg-extras.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\rosgraph_msgs\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/xmlrpcpp/cmake/xmlrpcppConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\cmake\"/>
-		</Unit>
-		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/xmlrpcpp/cmake/xmlrpcppConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\xmlrpcpp\cmake\"/>
 		</Unit>
 		<Unit filename="/home/zh/catkin_ws/src/PointGrey_CaptureROS/../../../../../opt/ros/kinetic/share/pluginlib/cmake/pluginlibConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\..\opt\ros\kinetic\share\pluginlib\cmake\"/>

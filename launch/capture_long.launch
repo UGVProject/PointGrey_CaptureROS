@@ -1,16 +1,19 @@
 <?xml version="1.0" ?>
 <launch>
 	<arg name="frameID"  default = "long_camera" />
-	<arg name="frameTopic"  default = "long/image_raw" />
+	<arg name="frameTopic"  default = "image_raw" />
 	<arg name="visualization" value="true"/>
+    <arg name="left_calib_url" default="file://$(find flea3)/cfg/$(arg frameID)_left.yaml"/>
+    <arg name="right_calib_url" default="file://$(find flea3)/cfg/$(arg frameID)_right.yaml"/>
 
 	<node name="stereo_record_node" pkg="flea3" type="stereo_record_node" output="screen" >
     <!-- <param name="left/Guid" value="15231263" />   remote 16243866  |    right  15231263    -->
-		<param name="left/Guid" value="16243866" />
-    <param name="right/Guid" value="15231263" />
-
-		<param name="cvmat_show" value="$(arg visualization)" />
-		<param name="showfrequency_ratio" value="2" />
+	<param name="left/Guid" type="string" value="16243866" />
+    <param name="right/Guid" type="string" value="15231263" />
+    <param name="left/calib_url" type="string" value="$(arg left_calib_url)"/>
+    <param name="right/calib_url" type="string" value="$(arg right_calib_url)"/>
+	<param name="cvmat_show" value="$(arg visualization)" />
+	<param name="showfrequency_ratio" value="2" />
 		<!--  under visualization true: show every ratio frames! -->
     <param name="image/width" value="1280" />
     <param name="image/height" value="1024" />
@@ -18,13 +21,16 @@
 	<param name="scale" value="0.5" />
     <param name="publish/frequency" value="50" />
     <param name="publish/frame_id" value="$(arg frameID)" />
-    <param name="publish/topic_name" value="$(arg frameTopic)" />
+    <param name="publish/topic_name" value="long/$(arg frameTopic)" />
 
-		<param name="publish/left_topic"            value="long/left/image_raw" />
-		<param name="publish/left_frame_id"         value="long_camera" />
+		<param name="publish/left_topic"            value="long/left/$(arg frameTopic)" />
+		<param name="publish/left_frame_id"         value="$(arg frameTopic)" />
 
-		<param name="publish/right_topic"           value="long/right/image_raw" />
-		<param name="publish/right_frame_id"        value="long_camera" />
+		<param name="publish/right_topic"           value="long/right/$(arg frameTopic)" />
+		<param name="publish/right_frame_id"        value="$(arg frameTopic)" />
+
+        <param name="publish/left_info_topic"            value="long/left/$(arg frameTopic)_info" />
+        <param name="publish/right_info_topic"            value="long/right/$(arg frameTopic)_info" />
 
     <param name="roi/upbound" value="60" />
     <param name="roi/downbound" value="120" />

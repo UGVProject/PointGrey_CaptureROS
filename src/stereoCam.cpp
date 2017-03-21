@@ -3,6 +3,7 @@
 // Modified by Zhang Handuo on 22/04/16.
 #include "stereoCam.h"
 
+using namespace std;
 namespace flea3 {
 
 stereoCam::stereoCam()
@@ -13,7 +14,9 @@ stereoCam::stereoCam()
       trigger_mode_value(0),scale(0.5) {
 //    count_outof_sync = 0;
     visualization = false;
-    flag_pause = false;}
+    flag_pause = false;
+
+}
 
 stereoCam::~stereoCam() {
   //
@@ -93,6 +96,14 @@ void stereoCam::set_TriggerMode_value(unsigned int triggerMode) {
 
 //void stereoCam::setFrameId(const std::string frame_id) { frame_id_ = frame_id; }
 
+void stereoCam::fillCamInfo(sensor_msgs::CameraInfoPtr left_cam_info_msg, sensor_msgs::CameraInfoPtr right_cam_info_msg,
+    string left_frame_id, string right_frame_id){
+
+
+//    left_cam_info_msg
+
+}
+
 void stereoCam::run() {
   ros::NodeHandle nh;
   ros::NodeHandle nh_s("~");
@@ -118,13 +129,13 @@ void stereoCam::run() {
   else
     ROS_WARN("Use default image roi downbound: %d", downbound);
   if(nh_s.getParam("left/Guid", uid_left))
-    ROS_INFO("left camera guid: %d", uid_left);
+    ROS_INFO("left camera guid: %d", uid_left.c_str() );
   else
-    ROS_WARN("Use default left camera guid: %d", uid_left);
+    ROS_WARN("Use default left camera guid: %d", uid_left.c_str() );
   if(nh_s.getParam("right/Guid", uid_right))
-    ROS_INFO("right camera guid: %d", uid_right);
+    ROS_INFO("right camera guid: %d", uid_right.c_str() );
   else
-    ROS_WARN("Use default right camera guid: %d", uid_right);
+    ROS_WARN("Use default right camera guid: %d", uid_right.c_str() );
   if(nh_s.getParam("shutter_speed", shuttle_speed))
     ROS_INFO("shutter speed: %f", shuttle_speed);
   else
@@ -164,12 +175,31 @@ void stereoCam::run() {
   else
     ROS_WARN("Use default right stereo frame topic: %s", right_topic_name_.c_str());
 
+  if(nh_s.getParam("publish/left_info_topic",  left_cam_info_topic_ ))
+    ROS_INFO("Get left camera information: %s", left_cam_info_topic_.c_str());
+  else
+    ROS_WARN("Use default left camera information: %s", left_topic_name_.c_str());
+
+  if(nh_s.getParam("publish/right_info_topic",  right_cam_info_topic_ ))
+    ROS_INFO("Get right camera information: %s", right_cam_info_topic_.c_str());
+  else
+    ROS_WARN("Use default right camera information: %s", right_topic_name_.c_str());
+
   if(nh_s.getParam("cvmat_show", visualization))
     ROS_INFO("Get visualization flag: %s",visualization? "true":"false");
   else
     ROS_WARN("Using default visualization flag: false!");
+
   // load parameters
   loadParam(nh);
+
+  left_info_mgr.reset(new camera_info_manager::CameraInfoManager(nh,uid_left, left_calib_url));
+  right_info_mgr.reset(new camera_info_manager::CameraInfoManager(nh,uid_right, right_calib_url));
+  left_cam_info_msg.reset(new sensor_msgs::CameraInfo(left_info_mgr->getCameraInfo()));
+  right_cam_info_msg.reset(new sensor_msgs::CameraInfo(right_info_mgr->getCameraInfo()));
+  left_cam_info_msg->header.frame_id = left_frame_id_;
+  right_cam_info_msg->header.frame_id = right_frame_id_;
+
     ///@debug
 //  framecount = 0;
 //  std::ofstream outputFile;
@@ -177,6 +207,11 @@ void stereoCam::run() {
 
   // init camera driver
   imgHeight_cut = imgHeight_ - upbound - downbound;
+  left_cam_info_msg->height = (unsigned int) (imgHeight_cut * scale);
+  right_cam_info_msg->height = (unsigned int) (imgHeight_cut * scale);
+  left_cam_info_msg->width = (unsigned int) (imgWidth_ * scale);
+  right_cam_info_msg->width = (unsigned int) (imgWidth_ * scale);
+
   m_cam_left.setShuttleSpeed(shuttle_speed);
   m_cam_right.setShuttleSpeed(shuttle_speed);
   m_cam_left.set_TriggerMode(trigger_mode_value);
@@ -187,13 +222,15 @@ void stereoCam::run() {
   // cv::Mat frame_right = frame_2(cv::Range::all() , cv::Range(imgWidth_ +1 ,
   // imgWidth_ *2));
 
-  if (m_cam_left.init((const uint64_t) uid_left) && m_cam_right.init((const uint64_t) uid_right)) {
+  if (m_cam_left.init(std::stoi(uid_left) ) && m_cam_right.init(std::stoi(uid_right) )) {
     frame_left = cv::Mat(imgHeight_, imgWidth_, CV_8UC1);
     frame_right = cv::Mat(imgHeight_, imgWidth_, CV_8UC1);
   } else {
     std::cout << "Left or Right camera init failed!" << std::endl;
     cameraFault_ = true;
   }
+    sensor_msgs::CameraInfoPtr left_cam_info_msg(new sensor_msgs::CameraInfo());
+    sensor_msgs::CameraInfoPtr right_cam_info_msg(new sensor_msgs::CameraInfo());
 
   // wait
   sleep(1);
